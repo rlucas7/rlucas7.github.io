@@ -8,10 +8,10 @@
 
 # Basic Site Settings
 locale                   : "en-US"
-title                    : "Your Name / Site Title"
+title                    : ""
 title_separator          : "-"
-name                     : &name "Your Name"
-description              : &description "personal description"
+name                     : &name "Lucas Roberts"
+description              : &description "Personal webpage"
 url                      : https://rlucas7.github.io # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl                  : "/blog" # the subpath of your site, e.g. "/blog"
 repository               : "rlucas7/rlucas7.github.io"
@@ -22,11 +22,11 @@ repository               : "rlucas7/rlucas7.github.io"
 author:
   # Biographic information
   avatar           : "profile.png"
-  name             : "Your Sidebar Name"
+  name             : "Lucas Roberts"
   pronouns         : # example: "she/her"  
-  bio              : "Short biography for the left-hand sidebar"
-  location         : "Earth"
-  employer         : "Red Brick University"
+  bio              : "Applied Machine Learning and Artificial Intelligence Researcher"
+  location         : "New york, New York"
+  employer         : ""
   uri              : # URL
   email            : "none@example.org" 
 

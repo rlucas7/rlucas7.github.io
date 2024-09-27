@@ -28,13 +28,13 @@ author:
   location         : "New york, New York"
   employer         : ""
   uri              : # URL
-  email            : "none@example.org" 
+  email            : "rlucas7@vt.edu"
 
   # Academic websites
-  arxiv            : # URL - Update with the correct link to your profile
-  googlescholar    : "https://scholar.google.com/citations?user=PS_CX0AAAAAJ"
+  arxiv            : "https://arxiv.org/search/?query=Lucas+Roberts&searchtype=all&order=-announced_date_first&size=50"
+  googlescholar    : "https://scholar.google.com/citations?user=_kr2jm8AAAAJ"
   impactstory      : # URL
-  orcid            : "http://orcid.org/yourorcidurl"
+  orcid            : "http://orcid.org/0000-0002-5249-0684"
   semantic         : # URL
   pubmed           : "https://www.ncbi.nlm.nih.gov/pubmed/?term=john+snow"
   researchgate     : # URL

@@ -3,7 +3,7 @@ title: "Nearest-neighbor matchup effects:     accounting for team matchups for p
 collection: publications
 category: manuscripts
 permalink: /publication/2024-10-01-paper-title-number-1
-excerpt: 'This paper is about the number 1. The number 2 is left for future work.'
+excerpt: 'We introduce our novel nearest-neighbor matchup effects framework, which presents a flexible way to account for team characteristics above and beyond team strength that may influence game outcomes. '
 date: 2015-02-23
 venue: ' Journal of Quantitative Analysis in Sports'
 slidesurl: ''

@@ -12,7 +12,7 @@ as well as a cross attention layer (vision & text). We fine tune the model using
 date: 2024-07-26
 venue: 'ICML 2024'
 paperurl: 'https://smarter-vlm.github.io/smarter-vlm/'
-citation: 'Your Name, You. (2024). &quot;Paper Title Number 3.&quot; <i>GitHub Journal of Bugs</i>. 1(3).'
+citation: 'Roberts D, Roberts L. Smart Vision-Language Reasoners. arXiv preprint arXiv:2407.04212. 2024 Jul 5.'
 ---
 
 The architecture
@@ -71,7 +71,7 @@ contained inside the images but that math problems can be solved without images.
 
 3. Images in math ai found not to help
 
-This is a finding in the MathVerse paper, e.g. the model learns to shortcut the
+This is a finding in the [MathVerse](https://mathverse-cuhk.github.io/) paper, e.g. the model learns to shortcut the
 vision features and rely primarily on the text features of the problem.
 My commentary on this is the same as item 2 above, the architectures did not pool
 the visual and textual information.

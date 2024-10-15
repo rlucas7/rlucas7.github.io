@@ -13,3 +13,6 @@ package-lock.json
 
 # ignore mac fs indexing files
 *.DS_store*
+
+# for local rendering to reduce so many edits and load on gh servers
+.jekyll-metadata

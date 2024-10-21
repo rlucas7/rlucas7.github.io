@@ -114,7 +114,7 @@ packaging process to pick up the distributed files.
 When you change the directory structure in the package this also requires a couple changes to the
 test directory imports, e.g. [here](https://github.com/rlucas7/python-starter/commit/5a68112d22b10bc1fa26201e3205978e3fe026c3). 
 
-![](images/package-name-diff.png?raw=true)
+![image]({{site.baseurl}}/assets/img/package-name-diff.png)
 
 Forgetting to change the unit test import statements will result in failing tests on the remote.
 If not the name of the package in the package config or the directory structure won't match what is in the git repo.
@@ -222,7 +222,7 @@ collections2    2024-10-18T18:04:23  2024-10-18T18:04:23
 python-starter  2024-10-18T18:04:23  2024-10-18T18:04:24
 ```
 
-![](images/packages-and-naming.png?raw=true)
+<img src="{{site.baseurl}}/assets/img/packages-and-naming.png"/>
 
 Note: For python packages that have more than python code then you can get into
 issues around building from various operating systems (windows, mac, linux, etc) as well
@@ -246,7 +246,7 @@ python3.11 -m setuptools_scm
 
 Note that google will accept a non-release version of the package.
 
-![](images/non-release-version-gcloud-artifact-reg.png?raw=true)
+![image]({{site.baseurl}}/assets/img/non-release-version-gcloud-artifact-reg.png)
 
 We'll see how to update this now. It's fairly simple and described in the readme for the
 template, using git tags you change these to `0.1` say and then make a commit.
@@ -309,7 +309,7 @@ into the github repo and have them be used effectively.
 
 First create the google auth credentials, creata a service role and then generate the credential file in the google cloud console.
 
-![](images/create-credentials.png?raw=true)
+<img src='{{site.baseurl}}/images/create-credentials.png'/>
 
 Github supports this via a secrets setup which you can safely
 use in your github action and the value should not be leaked into public view in

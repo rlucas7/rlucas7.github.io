@@ -1,3 +1,16 @@
+---
+title: 'Private python packages in Google cloud artifact registry'
+date: 2024-10-21
+permalink: /posts/2024/10/gcloud-python-package-registry-notes
+tags:
+  - google
+  - cloud
+  - python
+  - packaging
+  - github
+  - tutorial
+---
+
 # Google cloud artifact registry python packaging 
 
 These are some-relatively short but somewhat detailed-notes on setting up a google cloud 

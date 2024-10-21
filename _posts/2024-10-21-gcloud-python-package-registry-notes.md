@@ -113,9 +113,13 @@ Also, you'll need to [edit the directory structure names](https://github.com/rlu
 packaging process to pick up the distributed files.
 When you change the directory structure in the package this also requires a couple changes to the
 test directory imports, e.g. [here](https://github.com/rlucas7/python-starter/commit/5a68112d22b10bc1fa26201e3205978e3fe026c3). 
+
+![](images/package-name-diff.png?raw=true)
+
 Forgetting to change the unit test import statements will result in failing tests on the remote.
 If not the name of the package in the package config or the directory structure won't match what is in the git repo.
 These differences make it so you won't be able to ship the package and install in correctly. 
+
 
 # Step 5: Manually publish the package version from dev machine
 
@@ -218,6 +222,8 @@ collections2    2024-10-18T18:04:23  2024-10-18T18:04:23
 python-starter  2024-10-18T18:04:23  2024-10-18T18:04:24
 ```
 
+![](images/packages-and-naming.png?raw=true)
+
 Note: For python packages that have more than python code then you can get into
 issues around building from various operating systems (windows, mac, linux, etc) as well
 other aspects like if you also have custom gpu kernels. For this post we're going to say that
@@ -237,6 +243,10 @@ mid release version,
 python3.11 -m setuptools_scm
 # 0.0.post1.dev3+geada567
 ```
+
+Note that google will accept a non-release version of the package.
+
+![](images/non-release-version-gcloud-artifact-reg.png?raw=true)
 
 We'll see how to update this now. It's fairly simple and described in the readme for the
 template, using git tags you change these to `0.1` say and then make a commit.
@@ -296,6 +306,11 @@ You also need to set things up so that the github action has all the credentials
 
 The tricky part here-beside avoiding typos-is to put the google auth credentials
 into the github repo and have them be used effectively. 
+
+First create the google auth credentials, creata a service role and then generate the credential file in the google cloud console.
+
+![](images/create-credentials.png?raw=true)
+
 Github supports this via a secrets setup which you can safely
 use in your github action and the value should not be leaked into public view in
 the github action logs.

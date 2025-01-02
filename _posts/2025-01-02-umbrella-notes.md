@@ -26,7 +26,8 @@ The technique is nonetheless often found useful, indeed there are probably
 some other ways this method can be leveraged that have yet to be discovered.
 
 The paper is an open source reimplementation of a paper by researchers at
-microsoft working on bing. A paper I [put notes up on recently]().
+microsoft working on bing. A paper I
+[put notes up on recently](https://rlucas7.github.io/posts/2025/01//blog-post-1).
 
 # Notes
 

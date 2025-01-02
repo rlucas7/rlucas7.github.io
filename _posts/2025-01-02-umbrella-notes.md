@@ -36,6 +36,12 @@ task as of yet. For metrics the authors use NDCG@10 which differs from the bing
 team's paper. The authors evaluate the method in TREC DL tracks from 2019-2023.
 The prompt is documented both in the paper and in the github repo-see beneath
 
+In 3.1 DL TREC Judgments, the authors present the encoding of the relevances.
+These are given on a 0-3 integer ordinal scale which differs slightly from what
+the Prior microsoft/bing paper described. My assumption here is that in the bing
+paper they collapsed to a binary relevant/not relevant and used a 0.5 for the
+1/intermediate category and leble 2 here was mapped to relevant.
+
 The case study of 2 query-passage pairs highlights the challenges and
 benefits of leveraging the approach. The cases demonstrate ambiguity that
 could have been the result of either inaccurate assessments or

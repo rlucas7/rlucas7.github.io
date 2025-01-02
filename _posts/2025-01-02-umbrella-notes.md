@@ -28,6 +28,8 @@ some other ways this method can be leveraged that have yet to be discovered.
 The paper is an open source reimplementation of a paper by researchers at
 microsoft working on bing. A paper I [put notes up on recently]().
 
+# Notes
+
 The authors used OpenAI and the microsoft version as points of comparison.
 There does not appear to be comparisons across open/closed source LLMs for this
 task as of yet. For metrics the authors use NDCG@10 which differs from the bing

@@ -1,7 +1,7 @@
 ---
 title: 'Notes on RepoFormer paper'
 date: 2025-01-11
-permalink: /posts/2025/o`1/repoformer-notes
+permalink: /posts/2025/01/repoformer-notes
 tags:
   - aws
   - cloud
@@ -80,7 +80,7 @@ to rely on tree-sitter as a verifier of syntactic correctness.
 Tree sitter however will parse a syntactically incorrect bit of code although it
 might not continue down the subtree past the bit of incorrectness. This process
 is known as [error-recovery](https://apps.dtic.mil/sti/pdfs/ADA043470.pdf) in
-parsing.
+parsing. IIUC The expected behavior if an error is to have a raw text node.
 
 My confusion in the approach is a bit about shoehorning the code generation into an LLM
 and then verifying syntactical correctness as a second step.

@@ -105,8 +105,7 @@ I initially did the suggestion generation without
 [structured outputs](https://ai.google.dev/gemini-api/docs/structured-output?lang=python).
 The generated suggestions were much more fragile without so I'd recommend to use
 them for this or any other application where you pass the AI generated content
-to an API. To generate structured outputs in gemini you [define the output model]
-(https://github.com/rlucas7/code-reviewer/blob/009ddf5726a770e5b9351ace0f4ccb7cadc27c6d/src/reviewer/ai_client.py#L42) as a
+to an API. To generate structured outputs in gemini you [define the output model](https://github.com/rlucas7/code-reviewer/blob/009ddf5726a770e5b9351ace0f4ccb7cadc27c6d/src/reviewer/ai_client.py#L42) as a
 class and [pass it as a config](https://github.com/rlucas7/code-reviewer/blob/009ddf5726a770e5b9351ace0f4ccb7cadc27c6d/src/reviewer/ai_client.py#L79)
 so it's pretty lightweight to achieve. The exact way to implement this for each
 AI differs slightly and some of the AI from 1-2 years ago may not have structured output support.

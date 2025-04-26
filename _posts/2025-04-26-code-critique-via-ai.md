@@ -20,22 +20,22 @@ Suggested Edits format
 There are many code review tools you can use for your coding project, every one
 has tradeoffs.
 By choosing code review tool X you forsake features in code review tool Y that
-aren't support in tool X.
+aren't supported in tool X.
 This is the consequence of choice, decisions have opportunity costs.
 
-The purpose of this post is twofold, one to provide awareness of a tradeoff that
-may not be obvious if you do not use coding AI tools or haven't used them yet.
-Also, even if you have used said tools, say github's CoPilot, you may not be
-aware of this alternate AI approach and where it can be used.
+The purpose of this post is twofold, one is to provide awareness of a tradeoff
+that may not be obvious if you do not use coding AI tools or haven't used them
+yet. Also, even if you have used said tools, say github's CoPilot, you may not
+be aware of this alternate approach to code reviews and where it can be used.
 
-Ok so just what am I talking about?
+***Ok so just what am I talking about?***
 
 I'm talking about using AI to generate code reviews for you. More than this
-though, you can use an AI to suggest edits in the review.
+though, you can use an AI to suggest code edits directly in the review.
 
 You might ask, why would you do it this way rather than use copilot in your IDE?
 
-My first answer would be tradeoffs and my second answer would be that you can
+My first answer would be "tradeoffs" and my second answer would be that you can
 use both-provided you are using or choosing a code review tool that supports the
 workflow.
 
@@ -47,8 +47,8 @@ the suggested changes feature for almost 7 years now. Other tools also support
 this feature, the ones I'm aware of are
 [gitlab](https://docs.gitlab.com/api/suggestions/) and newer versions of
 [Gerrit](https://gerrit-review.googlesource.com/Documentation/user-suggest-edits.html).
-Probably other tools do or can be hacked to make this work if they don't
-already support.
+Probably other tools support this interaction too  or can be hacked to make
+this work if they don't already support.
 
 Ok so you can manually select a portion of a pull request/change set and make
 a suggestion of how you think the selected code should be (re)written.
@@ -56,8 +56,8 @@ a suggestion of how you think the selected code should be (re)written.
 Now that we've cleared up how that works, let's look at how to do this
 programmatically.
 
-Programmatic Suggested Edits
-======
+# Programmatic Suggested Code Edits
+
 
 At this point you may think this is a silly or trivial extension. You might say
 well I would never-or maybe only rarely-use a REST api directly to post the
@@ -75,28 +75,31 @@ the rest api expects. For github you can see the format in the docs. In my demo
 repo I make a simple class that handles the setup
 [here](https://github.com/rlucas7/code-reviewer/blob/009ddf5726a770e5b9351ace0f4ccb7cadc27c6d/src/reviewer/ai_client.py#L42).
 
+Basically, this setup expects the triple backticks plus the word suggestion
+also a starting line and some text as the suggestion of changes.
+The exact names and formats seems to differ somewhat between github and gitlab
+but the basic idea is the same.
 
-AI Programmatic Suggested Edits
-======
+# AI Programmatic Suggested Code Edits
 
 If you look through the pr [here](https://github.com/rlucas7/suggerere/pull/1)
 you'll see a couple suggestions that appear to be made by me on my own repo.
 For example, [this comment](https://github.com/rlucas7/suggerere/pull/1#discussion_r1986436865)
-was made by the AI and includes some suggested changes which you could merge by clicking the 'commit suggestion' button.
+was made by the AI and includes some suggested changes which you could merge by
+clicking the 'commit suggestion' button.
 
-<TODO add screenshot>
+<img src='{{site.baseurl}}/images/code-suggestion.png'/>
+
 
 In fact these were made using the google gemini model following the approach
-outlined above. The code which generated the comments is over in the
-[code-reviewer](https://github.com/rlucas7/code-reviewer/tree/main/src/reviewer)
+outlined above. The code which generated the comments is over in the [code reviewer](https://github.com/rlucas7/code-reviewer/tree/main/src/reviewer)
 code. The logic resides in the `ai_client.py` and `git_client` modules as well
 the `reviewer.py` module. The prompts are in the `prompts`
 subdirectory in the link.
 
 This is hacked together as a proof of concept.
 
-How I plan to make it better
-======
+# How I plan to make it better
 
 I initially did the suggestion generation without
 [structured outputs](https://ai.google.dev/gemini-api/docs/structured-output?lang=python).
@@ -114,8 +117,12 @@ support this workflow so I'd expect moving forward you'd be able to use on more 
 
 Second, I was using an API token on my own user. In practice, if you use this
 setup in a repo where several people are working it will:
+
 1. Seem like you are making comments that in fact an AI is making
+
 2. Confuse you when you look back at your comments on the PR(s).
+
+
 To make it easier for everyone, I recommend to create another user, something
 like `ai-reviewer-XXXX` or similar, and then make the token on that user and
 have the AI run through that user rather than your own.
@@ -126,10 +133,9 @@ or slower, induce more/less bugs etc. You could create a valid instrument for
 this type of analysis by storing the randomizations of (0/1). This would then
 be used in an instrumental variables type analysis.
 
-Open Questions
-======
+# Open Questions
 
-Other AIs:
+## Which AIs will generate useful content in this setting?
 
 I tested this out using the gemini model from google. This model is
 likely going to be deprecated in favor of newer versions. In most applications
@@ -145,7 +151,7 @@ If you try out other AIs and have either successes or failures drop me a note to
 let me know so I don't try the same ones.
 
 
-Other code review tools:
+## Which other code review tools support this style of interaction w/inline edit suggestions?
 
 While it seems like the api for gitlab and newer versions of gerrit should both
 work I haven't tested those out yet to confirm, I've only consulted the docs.
@@ -157,7 +163,7 @@ workflow. If you read this and test out either of these others, please let me
 know.
 
 
-Prompts:
+## Prompts which ways to tune them for this type of application?
 
 I used a single prompt that was super simple. The goal wasn't to get the best
 code reviews or to have the reviews adhere to a particular style or format of
@@ -167,7 +173,7 @@ used. Also, choosing better or more exemplars for the few-shotting might likely
 help further too.
 
 
-Non-coding applications:
+## What other, Non-coding applications might this be used for?
 
 You could use the same workflow for writing blog posts and having an AI review
 them before you publish them. You'd still need to use something like this for
@@ -176,6 +182,7 @@ the AI generates multiple suggestions you can accept/reject them as applicable.
 For example, this workflow could be used in my own github blog, or if there are
 other overlays into other blogging platforms that have a similar interface as
 the suggested edits.
+
 
 In any case if you want to hack more with this feel free to open a pull request
 on the `code-reviewer` repo or get in touch with me via email.

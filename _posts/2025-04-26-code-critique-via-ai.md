@@ -36,34 +36,39 @@ though, you can use an AI to suggest code edits directly in the review.
 You might ask, why would you do it this way rather than use copilot in your IDE?
 
 My first answer would be "tradeoffs" and my second answer would be that you can
-use both-provided you are using or choosing a code review tool that supports the
+use both-provided you are using a code review tool that supports the
 workflow.
 
-First I'll start with what the workflow is and then how you can do it
-programmatically, then how to loop in an AI to do it for you.
-
+First I'll start with describing the workflow and then do the workflow programmatically
+and only then add in the AI. The idea is to show the progression from human to
+AI.
+Note:
 [Github](https://github.blog/changelog/2018-10-16-suggested-changes/) has had
 the suggested changes feature for almost 7 years now. Other tools also support
 this feature, the ones I'm aware of are
-[gitlab](https://docs.gitlab.com/api/suggestions/) and newer versions of
+[Gitlab](https://docs.gitlab.com/api/suggestions/) and newer versions of
 [Gerrit](https://gerrit-review.googlesource.com/Documentation/user-suggest-edits.html).
 Probably other tools support this interaction too  or can be hacked to make
 this work if they don't already support.
 
 Ok so you can manually select a portion of a pull request/change set and make
 a suggestion of how you think the selected code should be (re)written.
+The description can be done in the browser of any of these code review tools.
 
 Now that we've cleared up how that works, let's look at how to do this
 programmatically.
 
 # Programmatic Suggested Code Edits
 
+Basically, we need to use the REST APIs of these code review services.
 
 At this point you may think this is a silly or trivial extension. You might say
-well I would never-or maybe only rarely-use a REST api directly to post the
+well I would never-or maybe only rarely-use a REST api directly to post
 code review with suggested edits, it's just an unnatural workflow for a code
 review to be done by a human. I would tend to agree with the sentiment.
-However, we're doing this incrementally to get to the point where an AI does
+
+However, keep in mind we're doing this incrementally.
+While this step might seem weird we're doing this to get to the point where an AI does
 the code review for us.
 
 So while this part may seem like a strange way to do things we'll build on it
@@ -71,8 +76,9 @@ in the next section.
 
 Looking through the suggested edits pages for the code review tools, you'll
 notice the api for posting a suggested edit. You need to follow a format that
-the rest api expects. For github you can see the format in the docs. In my demo
-repo I make a simple class that handles the setup
+the rest api expects. For github you can see the format in
+[the docs](https://docs.github.com/en/rest/commits/comments?apiVersion=2022-11-28#create-a-commit-comment).
+In the demo repo I make a simple class that handles the setup
 [here](https://github.com/rlucas7/code-reviewer/blob/009ddf5726a770e5b9351ace0f4ccb7cadc27c6d/src/reviewer/ai_client.py#L42).
 
 Basically, this setup expects the triple backticks plus the word suggestion
@@ -81,6 +87,14 @@ The exact names and formats seems to differ somewhat between github and gitlab
 but the basic idea is the same.
 
 # AI Programmatic Suggested Code Edits
+
+For testing that this will work you first need to create a token to use the
+REST api with the necessary permissions. For my testing I used a personal token.
+The reason was mostly for ease and simplicity. However, the downside of this
+is that the token means that the comments appear under the user.
+For the future I'll create a separate user that is solely the AI generated
+comments. This will make it easier when looking over code comments to determine
+who said what in the review of the PR.
 
 If you look through the pr [here](https://github.com/rlucas7/suggerere/pull/1)
 you'll see a couple suggestions that appear to be made by me on my own repo.
@@ -93,9 +107,22 @@ clicking the 'commit suggestion' button.
 
 In fact these were made using the google gemini model following the approach
 outlined above. The code which generated the comments is over in the [code reviewer](https://github.com/rlucas7/code-reviewer/tree/main/src/reviewer)
-code. The logic resides in the `ai_client.py` and `git_client` modules as well
-the `reviewer.py` module. The prompts are in the `prompts`
-subdirectory in the link.
+code. The logic resides in the
+[ai_client.py](c/reviewer/ai_client.py#L51) and
+[git_client.py](https://github.com/rlucas7/code-reviewer/blob/main/src/reviewer/git_client.py#L37)
+modules as well as the
+[reviewer.py](https://github.com/rlucas7/code-reviewer/blob/main/src/reviewer/reviewer.py#L11)
+module. The prompts are in the
+[prompts](https://github.com/rlucas7/code-reviewer/tree/main/src/reviewer/prompts)
+subdirectory and-for now-contains only the basic prompt to prove out the concept.
+
+Different code repositories might have different prompts to encourage reviews to
+focus on different styles or preferences.
+
+Additionally if you use this setup for reviewing blog posts (so basic text), then
+you might want a different prompting strategy, maybe something that encourages
+readability, clarity, and a certain structure of blog entries that you commonly
+write.
 
 This is hacked together as a proof of concept.
 
@@ -134,7 +161,7 @@ be used in an instrumental variables type analysis.
 
 # Open Questions
 
-## Which AIs will generate useful content in this setting?
+## Which AI models will generate useful content in this setting?
 
 I tested this out using the gemini model from google. This model is
 likely going to be deprecated in favor of newer versions. In most applications
@@ -149,20 +176,19 @@ create a new post and link & backlink.
 If you try out other AIs and have either successes or failures drop me a note to
 let me know so I don't try the same ones.
 
-
-## Which other code review tools support this style of interaction w/inline edit suggestions?
+## What other code review tools support this style of interaction w/inline edit suggestions?
 
 While it seems like the api for gitlab and newer versions of gerrit should both
-work I haven't tested those out yet to confirm, I've only consulted the docs.
+work I haven't tested those out yet to confirm they perform as documented-I've only consulted the docs.
 
-When I circle back to working on this I'll try to clean up the code some and to
+When I circle back to working on this I'll clean up the code some and
 also make it so that the same workflow code can be used in gitlab and in gerrit.
 The latter will require me to setup and run a version of gerrit to test the
 workflow. If you read this and test out either of these others, please let me
 know.
 
 
-## Prompts which ways to tune them for this type of application?
+## Prompts, which ways to tune them for this type of application?
 
 I used a single prompt that was super simple. The goal wasn't to get the best
 code reviews or to have the reviews adhere to a particular style or format of
@@ -184,7 +210,8 @@ the suggested edits.
 
 
 In any case if you want to hack more with this feel free to open a pull request
-on the `code-reviewer` repo or get in touch with me via email.
+on the [code-reviewer](https://github.com/rlucas7/code-reviewer/tree/main)
+repo or get in touch with me via email.
 
 If there are other code review tools which support this workflow drop me a
 note with the links to documentation and I'd be happy to add them to the post.

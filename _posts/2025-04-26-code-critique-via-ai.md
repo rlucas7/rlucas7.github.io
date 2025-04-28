@@ -10,23 +10,28 @@ tags:
   - structured outputs
 ---
 
-Generate code reviews with suggested changes automatically with AI.
-Structured outputs enhance the workflow by making the aI content conform to
-what we need in the API of each code review tool.
+How to generate code reviews with the suggested changes API automatically.
+
+Tip: Using structured outputs enhance the workflow by making the AI content
+conform to what we need in the API of each code review tool.
 
 Suggested Edits format
 ======
 
 There are many code review tools you can use for your coding project, every one
 has tradeoffs.
-By choosing code review tool X you forsake features in code review tool Y that
-aren't supported in tool X.
-This is the consequence of choice, decisions have opportunity costs.
+By choosing one code review tool you forsake features in a different code review tool.
+This is a consequence of choice, decisions have opportunity costs.
 
 The purpose of this post is twofold, one is to provide awareness of a tradeoff
 that may not be obvious if you do not use coding AI tools or haven't used them
 yet. Also, even if you have used said tools, say github's CoPilot, you may not
 be aware of this alternate approach to code reviews and where it can be used.
+
+For example, you might choose a different model than the one used by CoPilot to
+do code reviews, thereby adding a second layer of AI to your workflow.
+
+Presumably, this helps with robustness and creativity.
 
 ***Ok so just what am I talking about?***
 

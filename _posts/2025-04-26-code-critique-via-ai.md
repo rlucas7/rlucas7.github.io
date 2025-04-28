@@ -230,7 +230,7 @@ note with the links to documentation and I'd be happy to add them to the post.
   title = {Code critique via AI},
   year = 2025,
   howpublished = {\url{https://rlucas7.github.io/posts/2025/04/code-critique}},
-  note = {Written: 2024-04-26}
+  note = {Written: 2025-04-26}
 }
 ```
 

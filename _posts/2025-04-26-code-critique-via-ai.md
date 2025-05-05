@@ -181,11 +181,37 @@ To make it easier for everyone, I recommend to create another user, something
 like `ai-reviewer-XXXX` or similar, and then make the token on that user and
 have the AI run through that user rather than your own.
 
-An additional benefit of setting it up this way is that you could setup an A/B
-test to track whether the PRs which get comments by the AI are merged quicker
-or slower, induce more/less bugs etc. You could create a valid instrument for
-this type of analysis by storing the randomizations of (0/1). This would then
-be used in an instrumental variables type analysis.
+# How You can Quantify Efficacy
+
+An additional benefit of setting it the AI code review this way is that you
+could setup an A/B style test to track whether the PRs which get comments by
+the AI are merged quicker or slower, induce more/less bugs etc.
+You could create a valid instrument for this type of analysis by storing the
+randomizations of (0/1). This would then be used in an
+[instrumental variables](https://en.wikipedia.org/wiki/Instrumental_variables_estimation)
+analysis, these are also sometimes called IV models for shorthand.
+
+## Some things that need to be thought through for the IV analysis.
+
+1. Do you use the AI code review on every push? PRs can and often do have
+multiple pushes before merging.
+
+2. Do you give users the ability to generate on demand? This somewhat
+complicates the analysis because you no longer have a purely random instrument.
+Since I first wrote and published an earlier draft of this post I've seen
+that github is now implementing this feature in PRs. However, they do not appear
+to be using any randomizations but instead allow humans to request the AI review.
+
+3. How to handle errors in the AI reviews? Do you retry or ignore? As long as
+you use structured outputs in the requested models these errors of format are
+unlikely but could happen.
+
+4. What are the right metrics to measure productivity here? I've proposed time
+to merge as a simple one but this is also likely complicated by the length of
+the pull request and other repo specific factors. For example, some PRs might
+be done in multiple programming languages or impact various items. Also,
+different repositories are more (or less) complicated in terms of their existing
+structure. These-and other-factors may complicate things in the analysis a bit.
 
 # Open Questions
 

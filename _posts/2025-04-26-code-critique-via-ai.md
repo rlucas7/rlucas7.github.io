@@ -138,7 +138,7 @@ clicking the 'commit suggestion' button.
 In fact these were made using the google gemini model following the approach
 outlined above. The code which generated the comments is over in the [code reviewer](https://github.com/rlucas7/code-reviewer/tree/main/src/reviewer)
 code. The logic resides in the
-[ai_client.py](c/reviewer/ai_client.py#L51) and
+[ai_client.py](https://github.com/rlucas7/code-reviewer/blob/main/src/reviewer/ai_client.py#L51) and
 [git_client.py](https://github.com/rlucas7/code-reviewer/blob/main/src/reviewer/git_client.py#L37)
 modules as well as the
 [reviewer.py](https://github.com/rlucas7/code-reviewer/blob/main/src/reviewer/reviewer.py#L11)

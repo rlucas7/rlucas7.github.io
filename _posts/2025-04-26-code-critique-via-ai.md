@@ -104,6 +104,8 @@ curl -L \
   https://api.github.com/repos/OWNER/REPO/pulls/PULL_NUMBER/comments \
   -d '{"body":"```suggestion\n Awesome sauce!\n```","commit_id":"6dcb09b5b57875f334f61aebed695e2e4193db5e","path":"file1.txt","start_line":1,"start_side":"RIGHT","line":2,"side":"RIGHT"}'
 
+```
+
 Here you'll notice I used suggestion after some triple backticks and the
 string "Awesome sauce!" also being sure to close the triple backticks.
 The effect of the suggestion part is to turn that into a suggested change in

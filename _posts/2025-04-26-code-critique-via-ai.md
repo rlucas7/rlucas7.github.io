@@ -91,6 +91,29 @@ also a starting line and some text as the suggestion of changes.
 The exact names and formats seems to differ somewhat between github and gitlab
 but the basic idea is the same.
 
+Here is a more explicit example of how to achieve what I'm describing above.
+Taking the example given in the github docs for the REST API to comment on a
+pull request
+
+```bash
+curl -L \
+  -X POST \
+  -H "Accept: application/vnd.github+json" \
+  -H "Authorization: Bearer <YOUR-TOKEN>" \
+  -H "X-GitHub-Api-Version: 2022-11-28" \
+  https://api.github.com/repos/OWNER/REPO/pulls/PULL_NUMBER/comments \
+  -d '{"body":"```suggestion\n Awesome sauce!\n```","commit_id":"6dcb09b5b57875f334f61aebed695e2e4193db5e","path":"file1.txt","start_line":1,"start_side":"RIGHT","line":2,"side":"RIGHT"}'
+
+Here you'll notice I used suggestion after some triple backticks and the
+string "Awesome sauce!" also being sure to close the triple backticks.
+The effect of the suggestion part is to turn that into a suggested change in
+github.
+
+For other REST APIs (e.g. gitlab and gerrit) the API will be slightly different
+but in practice the workflow appears to be supported according to the docs of
+these other two services.
+
+
 # AI Programmatic Suggested Code Edits
 
 For testing that this will work you first need to create a token to use the

@@ -11,8 +11,11 @@ maintainers to easily add support for complex matrices.
 AlgoDiff 2024.'
 date: 2024-09-17
 venue: 'AlgoDiff 2024'
-paperurl: ''
-citation: ''
+paperurl: 'https://arxiv.org/pdf/2009.10071'
+citation: 'Roberts D, Roberts L. QR and LQ Decomposition Matrix Backpropagation
+Algorithms for Square, Wide, and Deep - Real or
+Complex - Matrices and Their Software
+Implementation. arXiv preprint arXiv:2009.10071. 2024'
 ---
 
 Slides from the talk are linked [here](https://rlucas7.github.io/talks/2024-09-17-talk)

@@ -10,7 +10,7 @@ by customizing the neural network architecture to pool information from both vis
 The improvements come from a custom QF layer which includes multihead self attention layers
 as well as a cross attention layer (vision & text). We fine tune the model using the smart-101 dataset presented in CVPR 2023.'
 date: 2024-07-26
-venue: 'ICML 2024'
+venue: 'ICML 2024 & NeurIPS 2024'
 paperurl: 'https://smarter-vlm.github.io/smarter-vlm/'
 citation: 'Roberts D, Roberts L. Smart Vision-Language Reasoners. arXiv preprint arXiv:2407.04212. 2024 Jul 5.'
 ---
@@ -41,6 +41,7 @@ The findings
 ============
 
 We find that there is improved performance over the baselines used in the smart-101 paper.
+I presented this work at [ICML 2024 MathAI workshop](https://icml.cc/virtual/2024/workshop/29948#:~:text=Smart%20Vision) in Vienna Austria.
 
 Critiques
 =========
@@ -96,3 +97,15 @@ hitherto unconsidered.
 If you are a researcher or institution who would like to work together in this space-or fund our investigations-please get in touch!
 
 My email contact is there on the left hand side of the screen only a click away.
+
+
+
+Updates Since Original Post
+===========================
+
+I presented a revised version of the paper was presented at Neurips 2024-Vancouver
+[Multimodal Algorithms Workshop](https://marworkshop.github.io/neurips24/#poster:~:text=Smart%20Vision)
+
+
+For the smarter project we have a [Centralized project page](https://smarter-vlm.github.io/smarter-vlm/)
+With both posters and links out to the repos if you want to compare the results in your own research.

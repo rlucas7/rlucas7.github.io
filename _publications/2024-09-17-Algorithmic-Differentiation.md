@@ -18,9 +18,12 @@ Complex - Matrices and Their Software
 Implementation. arXiv preprint arXiv:2009.10071. 2024'
 ---
 
-Slides from the talk are linked [here](https://rlucas7.github.io/talks/2024-09-17-talk)
-These contain some additional context that is not present in the [preprint](https://arxiv.org/abs/2009.10071)
+Slides from the talk are linked [here](https://rlucas7.github.io/talks/2024-09-17-talk).
+
+These contain some additional context that is not present in the [preprint](https://arxiv.org/abs/2009.10071).
+
 However, some items (flop count derivations) are not presented (for reasons of time).
+
 Flop counts and other updates are in the version to be published by Springer.
 
 What is a QR decomposition and why should you care?
@@ -41,6 +44,10 @@ which has a QR decomposition. We derive the mathematical equivalence between
 our formula and an existing formula. We argue that our formula is better and should
 therefore be preferred.
 
+The new equation is 3.8 and the existing equation is 3.3. These are given on
+[slides](https://rlucas7.github.io/talks/algodiff_2024_slides.pdf) 15 and 14 respectively.
+We advocate to prefer eqiuation 3.8 over 3.3, although both are mathematically
+equivalent-which we also prove-equation 3.8 is more efficient to calculate.
 
 The Recommendations
 ============
@@ -52,7 +59,7 @@ counts for comparisons via asymptotic considerations.
 Critiques
 =========
 
-Some critiques I heard at the AlgoDiff conference:
+Some critiques from the AlgoDiff review and conference:
 
 1. We did not include flop counts in our comparisons of the two formula
 2. We needed example matrices for an empirical study

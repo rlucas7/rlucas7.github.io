@@ -34,7 +34,11 @@ The decomposition appears as a subroutine in eigenvalue and eigenvector calculat
 solving least squares problems, and many applications with Krylov subspaces.
 
 If you've done any matrix algebra calculations in an application,
-you've probably used a QR decomposition and weren't aware.
+you've probably used a QR decomposition somewhere-perhaps without knowing.
+
+The first portion of the slides gives a brief background on the QR and how the
+decomposition is often implemented or derived. The emphasis in the slides is on
+the intuition of the QR calculations and not on being formally rigorous.
 
 The Results
 ========
@@ -46,8 +50,9 @@ therefore be preferred.
 
 The new equation is 3.8 and the existing equation is 3.3. These are given on
 [slides](https://rlucas7.github.io/talks/algodiff_2024_slides.pdf) 15 and 14 respectively.
-We advocate to prefer eqiuation 3.8 over 3.3, although both are mathematically
-equivalent-which we also prove-equation 3.8 is more efficient to calculate.
+We advocate to prefer our equation 3.8 over existing 3.3, although they are
+mathematically equivalent-which we also prove-our equation 3.8 is more efficient
+to calculate.
 
 The Recommendations
 ============

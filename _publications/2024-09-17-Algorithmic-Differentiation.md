@@ -110,8 +110,7 @@ We merged them as part of this work effort.
 
 This work has been used in [several subsequent papers](https://scholar.google.com/scholar?cites=6667333045569434596&as_sdt=5,33&sciodt=0,33&hl=en),
 including [a nice paper in NeurIPS 2024](https://proceedings.neurips.cc/paper_files/paper/2024/file/58b286aea34a91a3d33e58af0586fa40-Paper-Conference.pdf).
-
-That looks at scaling *gradients of functions of Matrices*, in these setups you
+This paper looks at scaling *gradients of functions of Matrices*, in these setups you
 often use eigevalue and eigenvector calculations as subroutines, and those often use QR.
 
 

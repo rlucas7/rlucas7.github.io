@@ -8,7 +8,7 @@ This paper proves two formula mathematically equivalent for real matrices with
 real valued entries and non-equivalence for complex valued matrices. For complex
 field entries, we derivate an adjustment that enables library developers and
 maintainers to easily add support for complex matrices.
-AlgoDiff 2024.'
+NOTE: Linked paper is a preprint, full paper is in press at Springer.'
 date: 2024-09-17
 venue: 'AlgoDiff 2024'
 paperurl: 'https://arxiv.org/pdf/2009.10071'

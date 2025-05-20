@@ -19,7 +19,7 @@ yourself here in the page.
 <script>
   const oneDarkEl = document.getElementById("oneDark");
   const view = cm6.createEditorView(undefined, document.getElementById("editor"));
-  const initialState = cm6.createEditorState("def foo():\n    print(\"hello world\")\n");
+  const initialState = cm6.createEditorState("def foo(a:int):\n    print(\"hello world\")\n    a *= 2.718281828\n    return a\n");
   view.setState(initialState);
   function changeTheme() {
       let options = {oneDark: oneDarkEl.checked};

@@ -3,10 +3,16 @@ title: 'Building a simple code editor in a web browser'
 layout: page
 ---
 
-In a previous blog post I did some study of the event processing and other aspects
-of codemirror v5. In that post I mentioned there is a new codemirror version,
-v6. This post shows the v6 that I build and loads it so you can test it out
+This page demonstrates a code editor so you can test it out
 yourself here in the page.
+
+The checkbox toggles darkmode on and off for the code editor.
+
+The down spot in the gutter can be clicked to toggle folding
+for the prepopulated function.
+
+If you write more multiline functions you will see additional
+folds any `def` (or `class`) lines.
 
 
 <div id="editor"></div>
@@ -19,7 +25,7 @@ yourself here in the page.
 <script>
   const oneDarkEl = document.getElementById("oneDark");
   const view = cm6.createEditorView(undefined, document.getElementById("editor"));
-  const initialState = cm6.createEditorState("def foo(a:int):\n\tprint(\"hello world\")\n\ta *= 2.718281828\n\treturn a\n\n#try out the folds on the first line in the gutter");
+  const initialState = cm6.createEditorState("def foo(a:int):\n\tprint(\"multiplying by e\")\n\ta *= 2.718281828\n\treturn a\n\n#try out the folds on the first line in the gutter");
   view.setState(initialState);
   function changeTheme() {
       let options = {oneDark: oneDarkEl.checked};

@@ -15,7 +15,7 @@ yourself here in the page.
   <label for="oneDark">Toggle <a href="https://github.com/codemirror/theme-one-dark">One Dark</a> Theme</label>
   <br>
   <!-- CodeMirror 6 -->
-<script src="./cm6.bundle.min.js"></script>
+<script src="cm6.bundle.min.js"></script>
 <script>
   const oneDarkEl = document.getElementById("oneDark");
   const view = cm6.createEditorView(undefined, document.getElementById("editor"));

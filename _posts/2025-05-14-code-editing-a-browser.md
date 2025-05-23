@@ -68,13 +68,13 @@ In codemirror these are called `hints` likely for proprietary reasons-maybe some
 
 Ok, so these get into the purview of addons, the ones that ship with codemirror directly are in the [addons folder](https://github.com/rlucas7/client-editor/tree/main/codemirror-5.65.19/addon).
 
-Of course if those don't suit your fancy and you want more or unique customization you can roll your own or find a third party addon that suits your needs. Google is your friend here, eg. they wrote one for diff views that I peeked at a bit. 
+Of course if those don't suit your fancy and you want more or unique customization you can roll your own or find a third party addon that suits your needs. Google is your friend here, eg. they wrote one for diff views that I peeked at a bit.
 I didn't try to implement though because this was timeboxed to a single day project.
 
 ## Intellisense completions (hints)
 
 I got these working first. There are a couple things you need to add to the page.
-You need [a key or keys](https://github.com/rlucas7/client-editor/blob/bd3c674435704b2d0b32c9a0d630f6be56220d35/index.html#L62) to trigger the hints and you need to [link the addons](https://github.com/rlucas7/client-editor/blob/bd3c674435704b2d0b32c9a0d630f6be56220d35/index.html#L7), note that there are actually a couple files here in the header of the page. 
+You need [a key or keys](https://github.com/rlucas7/client-editor/blob/bd3c674435704b2d0b32c9a0d630f6be56220d35/index.html#L62) to trigger the hints and you need to [link the addons](https://github.com/rlucas7/client-editor/blob/bd3c674435704b2d0b32c9a0d630f6be56220d35/index.html#L7), note that there are actually a couple files here in the header of the page.
 
 <img src='{{site.baseurl}}/images/ctrl-q-intellisense.png'/>
 
@@ -111,7 +111,7 @@ Instead you want to import the file and then edit is a bit to make it simple, si
 
 This means we want to read in a file and inject the contents into the editor.
 
-Another input tag and some file system codes will achieve this for us, the function is named [fileInput](https://github.com/rlucas7/client-editor/blob/bd3c674435704b2d0b32c9a0d630f6be56220d35/index.html#L99) and the input tag in the html is [here](https://github.com/rlucas7/client-editor/blob/bd3c674435704b2d0b32c9a0d630f6be56220d35/index.html#L19). 
+Another input tag and some file system codes will achieve this for us, the function is named [fileInput](https://github.com/rlucas7/client-editor/blob/bd3c674435704b2d0b32c9a0d630f6be56220d35/index.html#L99) and the input tag in the html is [here](https://github.com/rlucas7/client-editor/blob/bd3c674435704b2d0b32c9a0d630f6be56220d35/index.html#L19).
 
 Ok so we've achieved file input. Check it out for yourself, it's handy.
 
@@ -139,7 +139,7 @@ One thing you'll notice is the `origin` part of the js objects being fired, thes
 
 <img src='{{site.baseurl}}/images/editor-edit-events.png'/>
 
-If you've ever done an interview via coderpad and seen the recording that comes out of the application after this is one way you could implement something like that, store all the edits and replay them on a timeline, the timestamps are stored inside the events that are fired I'm just not making much light out of it here. 
+If you've ever done an interview via coderpad and seen the recording that comes out of the application after this is one way you could implement something like that, store all the edits and replay them on a timeline, the timestamps are stored inside the events that are fired I'm just not making much light out of it here.
 
 Coderpad does a bit more than this though, they provide simulataneous user edits and replay.
 The scenario would be if you and your colleague are both editing the browser editor surface at the same time, perhaps in different timezones and then the 45 minute session is stored and replayable afterward.
@@ -186,3 +186,18 @@ If I had more time to devote to this proof of concept I'd likely implement:
 }
 ```
 
+<script src="https://giscus.app/client.js"
+        data-repo="rlucas7/rlucas7.github.io"
+        data-repo-id="MDEwOlJlcG9zaXRvcnkzODMyNTM2MzA="
+        data-category="General"
+        data-category-id="DIC_kwDOFtf8fs4Cqeqt"
+        data-mapping="url"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="preferred_color_scheme"
+        data-lang="en"
+        crossorigin="anonymous"
+        async>
+</script>

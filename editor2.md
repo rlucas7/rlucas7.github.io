@@ -70,11 +70,11 @@ folds any `def` (or `class`) lines.
     view.setState(initialState);
     function configChange() {
         const oneDarkEl = document.getElementById("oneDark");
-	    var e = document.getElementById("indentUnit");
-	    var value = e.value;
-        var text = e.options[e.selectedIndex].text;
+	    const e = document.getElementById("indentUnit");
+	    const value = e.value;
+        const text = e.options[e.selectedIndex].text;
 	    const options = {oneDark: oneDarkEl.checked, indentAmount: " ".repeat(Number(text))};
-        var newState = cm6.createEditorState(view.state.doc, options);
+        const newState = cm6.createEditorState(view.state.doc, options);
         view.setState(newState);
 	}
 </script>
@@ -83,24 +83,24 @@ folds any `def` (or `class`) lines.
 <textarea id="output" style="width: 100%;" rows="16" disabled></textarea>
 <script>
   const output = document.getElementById("output");
-  var cmEditorElement = document.querySelector(".cm-editor")
-  var editorView = cmEditorElement.querySelector(".cm-content").cmView.view
-  var code = editorView.viewState.state.doc.toString()
+  const cmEditorElement = document.querySelector(".cm-editor")
+  const editorView = cmEditorElement.querySelector(".cm-content").cmView.view
+  const code = editorView.viewState.state.doc.toString()
   function addToOutput(s) {
     output.value += ">>>" + s + "\n";
   }
   output.value = "Initializing...\n";
   async function main() {
-    var pyodide = await loadPyodide();
+    const pyodide = await loadPyodide();
     output.value += "Ready!\n";
     return pyodide;
   }
-  var pyodideReadyPromise = main();
+  const pyodideReadyPromise = main();
   async function evaluatePython() {
-    var code = editorView.viewState.state.doc.toString()
-    var pyodide = await pyodideReadyPromise;
+    const code = editorView.viewState.state.doc.toString()
+    const pyodide = await pyodideReadyPromise;
     try {
-      var output = pyodide.runPython(code);
+      const output = pyodide.runPython(code);
       addToOutput(code);
       addToOutput(output);
     } catch (err) {

@@ -57,7 +57,6 @@ folds any `def` (or `class`) lines.
         box-shadow: inset 0px 0px 5px #c1c1c1;
          outline: none;
     }
-	/* green */
 </style>
 <script src="https://cdn.jsdelivr.net/pyodide/v0.27.6/full/pyodide.js"></script>
 <div class="blackout-container">
@@ -97,18 +96,15 @@ Just enter something in the box below and click the button to test it out.
 
 <script>
   const output = document.getElementById("output");
-  let cmEditorElement = document.querySelector(".cm-editor") // Or whatever query you need
+  let cmEditorElement = document.querySelector(".cm-editor")
   let editorView = cmEditorElement.querySelector(".cm-content").cmView.view
   let code = editorView.viewState.state.doc.toString()
   function addToOutput(s) {
     output.value += ">>>" + s + "\n";
   }
   output.value = "Initializing...\n";
-  // init Pyodide
   async function main() {
     let pyodide = await loadPyodide();
-	// uncomment to include specific packages if you want them
-	//await pyodide.loadPackage('numpy')
     output.value += "Ready!\n";
     return pyodide;
   }
@@ -124,7 +120,6 @@ Just enter something in the box below and click the button to test it out.
       addToOutput(err);
     }
   }
-  // hidden text effect
   const blackoutContainers = document.querySelectorAll(".blackout-container");
   blackoutContainers.forEach(container => {
     const text = container.querySelector(".blackout-text");

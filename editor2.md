@@ -71,9 +71,9 @@ folds any `def` (or `class`) lines.
         const oneDarkEl = document.getElementById("oneDark");
 	    const e = document.getElementById("indentUnit");
 	    const value = e.value;
-        const text = e.options[e.selectedIndex].text;
-	    const options = {oneDark: oneDarkEl.checked, indentAmount: " ".repeat(Number(text))};
-        const newState = cm6.createEditorState(view.state.doc, options);
+        let text = e.options[e.selectedIndex].text;
+	    let options = {oneDark: oneDarkEl.checked};
+        let newState = cm6.createEditorState(view.state.doc, options);
         view.setState(newState);
 	}
 </script>

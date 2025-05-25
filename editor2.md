@@ -62,7 +62,6 @@ folds any `def` (or `class`) lines.
 <div id="editor"></div>
 <input type="checkbox" id="oneDark" name="oneDark" onchange="configChange()">
 <label for="oneDark">Toggle <a href="https://github.com/codemirror/theme-one-dark">One Dark</a> Theme</label>
-<br>
 <script src="../cm6-v2.bundle.min.js"></script>
 <script>
     const view = cm6.createEditorView(undefined, document.getElementById("editor"));
@@ -77,6 +76,7 @@ folds any `def` (or `class`) lines.
         const newState = cm6.createEditorState(view.state.doc, options);
         view.setState(newState);
 	}
+console.log("made it to end of first script tag with code")
 </script>
 <button class="run-button" onclick="evaluatePython()">Run</button>
 <div>Shell Output:</div>

@@ -70,7 +70,6 @@ folds any `def` (or `class`) lines.
     function configChange() {
         const oneDarkEl = document.getElementById("oneDark");
 	    const e = document.getElementById("indentUnit");
-	    const value = e.value;
         let text = e.options[e.selectedIndex].text;
 	    let options = {oneDark: oneDarkEl.checked};
         let newState = cm6.createEditorState(view.state.doc, options);

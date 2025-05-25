@@ -5,12 +5,9 @@ layout: page
 
 This page demonstrates a code editor and REPL so you can test it out
 yourself here in the page.
-
 The checkbox toggles darkmode on and off for the code editor.
-
 The down spot in the gutter can be clicked to toggle folding
 for the prepopulated function.
-
 If you write multiline functions you will see additional
 folds any `def` (or `class`) lines.
 
@@ -63,57 +60,47 @@ folds any `def` (or `class`) lines.
     <span class="blackout-text">Psst, here is a secret, you can import heapq methods if you want to use them.</span>
 </div>
 <div id="editor"></div>
-<br>
-
 <input type="checkbox" id="oneDark" name="oneDark" onchange="configChange()">
 <label for="oneDark">Toggle <a href="https://github.com/codemirror/theme-one-dark">One Dark</a> Theme</label>
 <br>
-
 <script src="../cm6-v2.bundle.min.js"></script>
 <script>
     const view = cm6.createEditorView(undefined, document.getElementById("editor"));
     const initialState = cm6.createEditorState("def foo(a:int):\n    return sum(i for i in range(a))\n\nfoo(5)");
     view.setState(initialState);
-
     function configChange() {
         const oneDarkEl = document.getElementById("oneDark");
 	    var e = document.getElementById("indentUnit");
-	    let value = e.value;
+	    var value = e.value;
         var text = e.options[e.selectedIndex].text;
 	    const options = {oneDark: oneDarkEl.checked, indentAmount: " ".repeat(Number(text))};
-        let newState = cm6.createEditorState(view.state.doc, options);
+        var newState = cm6.createEditorState(view.state.doc, options);
         view.setState(newState);
 	}
-
 </script>
-
-Pressing the run button executes the Python code in the editor above.
-Just enter something in the box below and click the button to test it out.
 <button class="run-button" onclick="evaluatePython()">Run</button>
-
 <div>Shell Output:</div>
 <textarea id="output" style="width: 100%;" rows="16" disabled></textarea>
-
 <script>
   const output = document.getElementById("output");
-  let cmEditorElement = document.querySelector(".cm-editor")
-  let editorView = cmEditorElement.querySelector(".cm-content").cmView.view
-  let code = editorView.viewState.state.doc.toString()
+  var cmEditorElement = document.querySelector(".cm-editor")
+  var editorView = cmEditorElement.querySelector(".cm-content").cmView.view
+  var code = editorView.viewState.state.doc.toString()
   function addToOutput(s) {
     output.value += ">>>" + s + "\n";
   }
   output.value = "Initializing...\n";
   async function main() {
-    let pyodide = await loadPyodide();
+    var pyodide = await loadPyodide();
     output.value += "Ready!\n";
     return pyodide;
   }
-  let pyodideReadyPromise = main();
+  var pyodideReadyPromise = main();
   async function evaluatePython() {
-    let code = editorView.viewState.state.doc.toString()
-    let pyodide = await pyodideReadyPromise;
+    var code = editorView.viewState.state.doc.toString()
+    var pyodide = await pyodideReadyPromise;
     try {
-      let output = pyodide.runPython(code);
+      var output = pyodide.runPython(code);
       addToOutput(code);
       addToOutput(output);
     } catch (err) {

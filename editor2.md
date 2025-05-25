@@ -83,9 +83,9 @@ console.log("made it to end of first script tag with code")
 <textarea id="output" style="width: 100%;" rows="16" disabled></textarea>
 <script>
   const output = document.getElementById("output");
-  const cmEditorElement = document.querySelector(".cm-editor")
-  const editorView = cmEditorElement.querySelector(".cm-content").cmView.view
-  const code = editorView.viewState.state.doc.toString()
+  const cmEditorElement = document.querySelector(".cm-editor");
+  const editorView = cmEditorElement.querySelector(".cm-content").cmView.view;
+  const code = editorView.viewState.state.doc.toString();
   function addToOutput(s) {
     output.value += ">>>" + s + "\n";
   }
@@ -97,7 +97,7 @@ console.log("made it to end of first script tag with code")
   }
   const pyodideReadyPromise = main();
   async function evaluatePython() {
-    const code = editorView.viewState.state.doc.toString()
+    const code = editorView.viewState.state.doc.toString();
     const pyodide = await pyodideReadyPromise;
     try {
       const output = pyodide.runPython(code);

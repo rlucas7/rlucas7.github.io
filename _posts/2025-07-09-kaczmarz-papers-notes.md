@@ -32,10 +32,10 @@ You've got a system of linear equations (SLE) and you want to solve them,
 
 $$ Ax = b $$
 
-here \(( A \)) is a \((rows \times cols \)) matrix and \(( x \)) is a column vector, as is \(( b \)).
+here \\( A \\) is a \\(rows \times cols \\) matrix and \\( x \\) is a column vector, as is \\( b \\).
 
 Of course there are several ways in linear algebra (LA) to solve this problem.
-\(( A=LU \)) and \(( A=QR \)) using the LU and the QR decompositions come to mind.
+\\( A=LU \\) and \\( A=QR \\) using the LU and the QR decompositions come to mind.
 Both of those approaches are deterministic as typically presented to students.
 We will follow a similar approach with Kaczmarz, starting from the deterministic
 version and progress into randomized etc. versions.
@@ -43,12 +43,12 @@ version and progress into randomized etc. versions.
 $$
 x_{k+1} = x_{k} + \alpha_k \frac{b_{i_k} - \langle a_{i_k}, x_{k} \rangle}{\| a_{i_k} \|^2} a_{i_k},
 $$
-where \(( \alpha_k \in (0, 2) \)) for convergence.
+where \\( \alpha_k \in (0, 2) \\) for convergence.
 
 
 Now there is nothing about this that is random as currently written.
-For an algorithmic procedure we start with an initial guess \(( x_0 \)) and then update until a convergence criteria
-is met. This might be a change in \(( x_k \)) on successive iterates, or a maximum number of iterations.
+For an algorithmic procedure we start with an initial guess \\( x_0 \\) and then update until a convergence criteria
+is met. This might be a change in \\( x_k \\) on successive iterates, or a maximum number of iterations.
 These are two common stopping criteria.
 
 Now we said that this is an SLE but if we instead have inequalities (abbr. SLI) then we handle the
@@ -58,10 +58,10 @@ $$
 c_{k+1} = \textnormal{min}\left{0, \alpha_k \frac{b_{i_k} - \langle a_{i_k}, x_{k} \rangle}{\| a_{i_k} \|^2}\right},
 x_{k+1} = x_{k} + c_{k+1} a_{i_k}
 $$
-where \(( \alpha_k \in (0, 2) \)) for convergence.
+where \\( \alpha_k \in (0, 2) \\) for convergence.
 The difference here is that if we are on the boundary of the affine hyperplane then we need to stop moving which
-forces the \(( c_k=0 \)) for the iteration. If non-zero, then there is some flexibility in movement and the
-\(( x_k \)) vector will meander in a meaningful manner.
+forces the \\( c_k=0 \\) for the iteration. If non-zero, then there is some flexibility in movement and the
+\\( x_k \\) vector will meander in a meaningful manner.
 
 At this point it may seem like a bunch of formulae and calculations but what is the intuition of why this works?
 
@@ -72,9 +72,9 @@ Let's recall the cosine of the angle between two lines, in LA terms this is writ
 $$
 \frac{\langle a, x \rangle}{\| a \|^2} = cosine(\theta),
 $$
-where here \(( \theta \)) is the angle between the two lines, \(( a \)) and \(( x \)).
+where here \\( \theta \\) is the angle between the two lines, \\( a \\) and \\( x \\).
 That the lines are defined by vectors can be visualized in 2-dimensions where the point in 2 space represents a line emanating from the point
-\(( 0, 0 \)) which is often ominously called `the origin'.
+\\( 0, 0 \\) which is often ominously called `the origin'.
 
 Let's have some visualization in the Figures 1 & 2.
 
@@ -83,10 +83,10 @@ Let's have some visualization in the Figures 1 & 2.
 
 
 To keep things simple I use square 2-dimensional matrices so there are only 2 lines to show.
-The dashed red line indicates the direction of the movenment of each \(( x_k \)).
+The dashed red line indicates the direction of the movenment of each \\( x_k \\).
 These solutions converge on the exact solution, though the progress of the deterministic
 Kaczmarz decreases with each iteration.
-You'll notice that each successive red dot (an \(( x_k \)) ) is a projection from the previous point
+You'll notice that each successive red dot (an \\( x_k \\) ) is a projection from the previous point
 orthogonally onto the other line. This behavior holds in higher dimensions as well and if we have a tall
 matrix instead of a square one we would cycle projections over the 3 or more lines of the matrix, each being an
 orthogonal projection.
@@ -109,8 +109,8 @@ and
 $$
 y_{k+1} = \beta y_k + (1-\beta) (x_{k+1} -x_{k}),
 $$
-where here \(( M \in [0,1] \)) and \(( \beta in [0, 1) \)). If we set \(( \beta = 0 = M \)), then we get the
-usual Kaczmarz algorithm and the \(( y_k \)) tracks the distance between successive points in the iterations.
+where here \\( M \in [0,1] \\) and \\( \beta in [0, 1) \\). If we set \\( \beta = 0 = M \\), then we get the
+usual Kaczmarz algorithm and the \\( y_k \\) tracks the distance between successive points in the iterations.
 
 
 <img src='{{site.baseurl}}/images/Momentum_Kaczmarz_Figure.png'/>
@@ -142,20 +142,20 @@ or
 $$
  i_k = \textnormal{argmax}_i \| \frac{a_i^Tx_k - b_i}{\|\| a_i \|\|} \| \textnormal{MD},
 $$
-where the MR and MD are for maximal residual and maximal distance, the distance being between \(( x_k \)) and \(( x_{k+1} \)).
+where the MR and MD are for maximal residual and maximal distance, the distance being between \\( x_k \\) and \\( x_{k+1} \\).
 The thing I like about these row selection rules is that they *learn* as the algorithm progresses.
-This learning comes from the inclusion of the \(( x_k \)) values in the calculation.
-The tradeoff is that the learning comes at a cost, for each update when we learn new row entering ranks, we incur sortation cost of \(( \mathcal{O}(rlog(r)) \)) where \(( r \)) is the number of rows in the matrix \(( A \)).
+This learning comes from the inclusion of the \\( x_k \\) values in the calculation.
+The tradeoff is that the learning comes at a cost, for each update when we learn new row entering ranks, we incur sortation cost of \\( \mathcal{O}(rlog(r)) \\) where \\( r \\) is the number of rows in the matrix \\( A \\).
 
 This paper also mentions that SLI can be solved with the greedy approach too.
 By now we know that this is pretty straightforward.
 One interesting note they mention is that you can do any sort of norm optimization with a constraint with the SLI approach.
-The paper mentions using the SLI with a binary search over \(( \tau \)) to solve
+The paper mentions using the SLI with a binary search over \\( \tau \\) to solve
 
 $$
 \textnormal{min}_{x} f(x) = || Ax - b ||_1 + \lambda || x ||_1, \lambda \geq 0.
 $$
-And using \(( f(x) \leq \tau \)) where we vary \(( \tau \)) on each iteration, basically transforming the L_1 constrained L_1 optimization problem into a univariate binary search
+And using \\( f(x) \leq \tau \\) where we vary \\( \tau \\) on each iteration, basically transforming the L_1 constrained L_1 optimization problem into a univariate binary search
 and using the Kaczmarz as a subroutine.
 
 # Application To GUI Layouts

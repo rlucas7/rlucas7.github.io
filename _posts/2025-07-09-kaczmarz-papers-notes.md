@@ -79,7 +79,7 @@ That the lines are defined by vectors can be visualized in 2-dimensions where th
 Let's have some visualization in the Figures 1 & 2.
 
 <img src='{{site.baseurl}}/images/Kaczmarz_Simple_Sequential.png'/>
-<img src='{{site.baseurl}}/images/Kaczmarz_Deterministic_Figure2.png.png'/>
+<img src='{{site.baseurl}}/images/Kaczmarz_Deterministic_Figure2.png'/>
 
 
 To keep things simple I use square 2-dimensional matrices so there are only 2 lines to show.

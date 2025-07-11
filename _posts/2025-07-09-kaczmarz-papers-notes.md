@@ -1,10 +1,12 @@
 ---
 title: 'Notes from Several papers on Kaczmarz algorithm'
 date: 2025-07-09
-permalink: /posts/2025/07/blog-post-1
+permalink: /posts/2025/07/Kaczmarz-row-actions
 tags:
   - Linear Algebra
   - Randomized Algorithms
+  - Kaczmarz
+  - row acion methods
   - paper-notes
 ---
 
@@ -55,7 +57,7 @@ Now we said that this is an SLE but if we instead have inequalities (abbr. SLI) 
 solving routinte very similarly
 
 $$
-c_{k+1} = \textnormal{min}\left{0, \alpha_k \frac{b_{i_k} - \langle a_{i_k}, x_{k} \rangle}{\| a_{i_k} \|^2}\right},
+c_{k+1} = \textnormal{min} \left\{0, \alpha_k \frac{b_{i_k} - \langle a_{i_k}, x_{k} \rangle}{\| a_{i_k} \|^2}\right\},
 x_{k+1} = x_{k} + c_{k+1} a_{i_k}
 $$
 where \\( \alpha_k \in (0, 2) \\) for convergence.
@@ -74,7 +76,7 @@ $$
 $$
 where here \\( \theta \\) is the angle between the two lines, \\( a \\) and \\( x \\).
 That the lines are defined by vectors can be visualized in 2-dimensions where the point in 2 space represents a line emanating from the point
-\\( 0, 0 \\) which is often ominously called `the origin'.
+\\( (0, 0) \\) which is often ominously called `the origin'.
 
 Let's have some visualization in the Figures 1 & 2.
 
@@ -109,13 +111,13 @@ and
 $$
 y_{k+1} = \beta y_k + (1-\beta) (x_{k+1} -x_{k}),
 $$
-where here \\( M \in [0,1] \\) and \\( \beta in [0, 1) \\). If we set \\( \beta = 0 = M \\), then we get the
+where here \\( M \in [0,1] \\) and \\( \beta \in [0, 1) \\). If we set \\( \beta = 0 = M \\), then we get the
 usual Kaczmarz algorithm and the \\( y_k \\) tracks the distance between successive points in the iterations.
 
 
 <img src='{{site.baseurl}}/images/Momentum_Kaczmarz_Figure.png'/>
 
-The authors of this work also setup a formulation of Kaczmarz that uses Nesterov Acceleration (NA) .
+The authors of this work also setup a formulation of Kaczmarz that uses Nesterov Acceleration (NA).
 NA has 3 equations and I'll refer you to the paper to read those.
 They also have a nice theorem that gives quantitive information on the iterations of a randomized NA approach.
 
@@ -140,7 +142,7 @@ $$
 $$
 or
 $$
- i_k = \textnormal{argmax}_i \| \frac{a_i^Tx_k - b_i}{\|\| a_i \|\|} \| \textnormal{MD},
+ i_k = \textnormal{argmax}_i \| \frac{a_i^Tx_k - b_i}{\|\| a_i \|\|} \| \ \  \textnormal{MD},
 $$
 where the MR and MD are for maximal residual and maximal distance, the distance being between \\( x_k \\) and \\( x_{k+1} \\).
 The thing I like about these row selection rules is that they *learn* as the algorithm progresses.
@@ -173,7 +175,7 @@ the Kaczmarz algorithm.
 
 As with any linear program style problem to have an initial starting point is vital.
 If you don't have a feasible/valid starting point then phase I/II methods are the classical ways to find a starting point.
-You can also use this Kaczmarc method too, if you know how these phase I methods work.
+You can also use this Kaczmarz method too, if you know how these phase I methods work.
 
 # Irreducible Infeasible Sets (IIS)
 

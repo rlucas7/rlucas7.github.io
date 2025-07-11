@@ -12,7 +12,8 @@ tags:
 
 # Kaczmrz Algorithm and Related Algorithm Notes
 
-# Paper 1
+Note: this post contains my study of several papers which are linked here in the blog post.
+
 The paper [The Kaczmarz algorithm, row action methods, and statistical learning algorithms](https://faculty.sites.iastate.edu/esweber/files/inline-files/KaczmarzSGDrevised.pdf)
 s a Contemporary Mathematics, 2018 paper that looks at both Kaczmarz and related problems.
 
@@ -117,6 +118,11 @@ usual Kaczmarz algorithm and the \\( y_k \\) tracks the distance between success
 
 <img src='{{site.baseurl}}/images/Momentum_Kaczmarz_Figure.png'/>
 
+One key difference I'll point out here is that with a momentum method the steps can exceed the lines which delineate the
+boundaries in the more standard Kaczmarz steps. Why? The idea is the \\( \beta > 0 \\) makes the point be a moving point
+with perhaps constant or non-constant mass behind it as the point moves through the space.
+The further in the individual steps the point moves, the more momentum is added.
+
 The authors of this work also setup a formulation of Kaczmarz that uses Nesterov Acceleration (NA).
 NA has 3 equations and I'll refer you to the paper to read those.
 They also have a nice theorem that gives quantitive information on the iterations of a randomized NA approach.
@@ -125,6 +131,198 @@ In addition, they study the relationship between the eigenspace of the problem a
 acceleration methods, both Momentum and NA.
 
 The paper is very well written and contains many empirical examples to develop intuitions on the methods.
+
+# Code To Generate Simulations For Kaczmarz and Momentum Version
+
+```python
+import matplotlib.pyplot as plt
+import numpy as np
+
+
+
+# Randomly generate an intersection point
+intersection = np.random.uniform(-7, 7, 2)
+
+# Randomly generate line angles through the intersection point
+num_lines = 2
+angles = np.random.uniform(0, np.pi, num_lines)
+slopes = np.tan(angles)
+
+# Define the lines: y = m(x - x0) + y0
+def line(x, m, x0, y0):
+    return m * (x - x0) + y0
+
+# Plot the lines
+x_vals = np.linspace(-10, 10, 400)
+for m in slopes:
+    plt.plot(x_vals, line(x_vals, m, intersection[0], intersection[1]), label=f'Line')
+
+# Kaczmarz algorithm
+def kaczmarz(A, b, x0, max_iter=20):
+    x = x0
+    history = [x0]
+    for k in range(max_iter):
+        i = k % A.shape[0]
+        ai = A[i, :]
+        bi = b[i]
+        x = x + (bi - np.dot(ai, x)) / np.linalg.norm(ai)**2 * ai
+        history.append(x)
+    return np.array(history)
+
+# Momentum Kacznarz
+def momentum_kaczmarz(A, b, x0, max_iter=20, M=0.5, beta=0.5):
+    x = x0
+    y = x0 - x0 # always start out with no momentum
+    x_history = [x0]
+    y_history = [x0]
+    for k in range(max_iter):
+        i = k % A.shape[0]
+        ai = A[i, :]
+        bi = b[i]
+        x = x + (bi - np.dot(ai, x)) / np.linalg.norm(ai)**2 * ai  +  M*y
+        y = beta * y + (1-beta) * (x - x_history[-1])
+        x_history.append(x)
+        y_history.append(y)
+    return np.array(x_history), np.array(y_history)
+
+
+# suppose now we do a random order on the sam
+
+# Construct A and b from the lines
+A = np.column_stack((-slopes, np.ones(num_lines)))
+b = -slopes * intersection[0] + intersection[1]
+
+print("Kaczmarx with Ax=b and:")
+print(f"A = {A!r}")
+print(f"b = {b!r}")
+# Initial guess
+x0 = np.random.uniform(-5, 5, 2) # this is the first value and is copied into the kaczmarz history
+
+# Run Deterministic Kaczmarz algorithm
+history = kaczmarz(A, b, x0, max_iter=20)
+if False:
+    # Plot the iterations
+    plt.scatter(history[:, 0], history[:, 1], color='red', zorder=5)
+    plt.plot(history[:, 0], history[:, 1], color='red', linestyle='--', label='Kaczmarz Iterations')
+
+    # Mark the intersection point
+    plt.scatter(intersection[0], intersection[1], color='green', marker='*', s=200, label='Solution', zorder=10)
+
+    # Set aspect ratio 1:1
+    plt.gca().set_aspect('equal', adjustable='box')
+
+    # these are the X-Y coordinated at each iteration of Kaczmarz
+
+    xy_lim = 8
+    print(history)
+    exact = np.linalg.inv(A) @ b
+    print(f"exact solution is: {exact!r}")
+    # Add labels, legend, and grid
+    plt.xlabel('x')
+    plt.ylabel('y')
+    plt.legend()
+    plt.grid()
+    plt.title('Kaczmarz Algorithm in $\mathbb{R}^2$')
+    plt.xlim(-xy_lim, xy_lim)
+    plt.ylim(-xy_lim, xy_lim)
+    plt.axhline(0, color='black', linewidth=0.5)
+    plt.axvline(0, color='black', linewidth=0.5)
+    plt.show()
+
+# Note this can also be done is num_lines > 2 and the trajectory bounces around a lot more...
+# plot is
+#Kaczmarx with Ax=b and:
+# A = array([[-0.12503767,  1.        ],
+#        [ 0.46218237,  1.        ]])
+# b = array([-0.23716145,  2.85519088])
+# [[-2.31761924  4.98789131]
+#  [-1.63867112 -0.44205707]
+#  [-0.0945452   2.89888801]
+#  [ 0.29299827 -0.20052562]
+#  [ 1.40514086  2.20575955]
+#  [ 1.68426551 -0.0265648 ]
+#  [ 2.48527604  1.7065401 ]
+#  [ 2.68631302  0.09872889]
+#  [ 3.26323354  1.34698186]
+#  [ 3.40802859  0.18897052]
+#  [ 3.82355032  1.08801332]
+#  [ 3.92783763  0.25396624]
+#  [ 4.22711336  0.9014936 ]
+#  [ 4.30222534  0.3007788 ]
+#  [ 4.51777596  0.76715447]
+#  [ 4.57187467  0.33449513]
+#  [ 4.72712303  0.67039794]
+#  [ 4.76608714  0.358779  ]
+#  [ 4.87790335  0.60070994]
+#  [ 4.9059669   0.37626924]
+#  [ 4.9865015   0.55051779]]
+
+
+
+# figure 2 Data
+# Kaczmarx with Ax=b and:
+# A = array([[66.92575379,  1.        ],
+#        [-1.07451305,  1.        ]])
+# b = array([-142.79219973,    4.98128477])
+# [[-2.66488801 -2.04264369]
+#  [-2.10319557 -2.03425092]
+#  [-4.47488041  0.17296734]
+#  [-2.1366977   0.20790431]
+#  [-3.37224101  1.35776778]
+#  [-2.15415083  1.3759684 ]
+#  [-2.79781446  1.97499661]
+#  [-2.16324314  1.98447833]
+#  [-2.49856354  2.29654563]
+#  [-2.16797984  2.30148519]
+#  [-2.34266699  2.4640585 ]
+#  [-2.17044745  2.4666318 ]
+#  [-2.26145176  2.55132533]
+#  [-2.17173296  2.5526659 ]
+#  [-2.2191422   2.5967875 ]
+#  [-2.17240266  2.59748588]
+#  [-2.19710078  2.62047129]
+#  [-2.17275154  2.62083512]
+#  [-2.18561818  2.6328095 ]
+#  [-2.1729333   2.63299904]
+#  [-2.17963625  2.63923717]]
+# exact solution is: array([-2.17313095,  2.64622719])
+
+
+# Run Kaczmarz w/ momentum
+x_history, y_history = momentum_kaczmarz(A, b, x0, max_iter=20)
+# Plot the iterations
+plt.scatter(x_history[:, 0], x_history[:, 1], color='red', zorder=5)
+plt.plot(x_history[:, 0], x_history[:, 1], color='red', linestyle='--', label='Momentum Kaczmarz Iterations')
+plt.plot(history[:, 0], history[:, 1], color='black', linestyle='-', label='Kaczmarz Iterations')
+# Mark the intersection point
+plt.scatter(intersection[0], intersection[1], color='green', marker='*', s=200, label='Solution', zorder=10)
+
+# Set aspect ratio 1:1
+plt.gca().set_aspect('equal', adjustable='box')
+
+# these are the X-Y coordinated at each iteration of Kaczmarz
+
+xy_lim = 8
+print(history)
+exact = np.linalg.inv(A) @ b
+print(f"exact solution is: {exact!r}")
+# Add labels, legend, and grid
+plt.xlabel('x')
+plt.ylabel('y')
+plt.legend()
+plt.grid()
+plt.title('Kaczmarz Algorithm in $\mathbb{R}^2$')
+plt.xlim(-xy_lim, xy_lim)
+plt.ylim(-xy_lim, xy_lim)
+plt.axhline(0, color='black', linewidth=0.5)
+plt.axvline(0, color='black', linewidth=0.5)
+plt.show()
+```
+
+Note that in the scratch code here you can see the raw values from the two deterministic Kaczmarc plots.
+You might need to modify the source code here a small bit to generate plots like those in the post.
+You won't get the exact plots because I forgot to set fixed seeds in the random number generators.
+Play around with the code a bit though, you'll see similar figures as you execute the code.
 
 # Greedy Kaczmard
 

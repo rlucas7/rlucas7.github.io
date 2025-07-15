@@ -81,9 +81,71 @@ That the lines are defined by vectors can be visualized in 2-dimensions where th
 
 Let's have some visualization in the Figures 1 & 2.
 
-<img src='{{site.baseurl}}/images/Kaczmarz_Simple_Sequential.png' loading='lazy'/>
-<img src='{{site.baseurl}}/images/Kaczmarz_Deterministic_Figure2.png' loading='lazy'/>
+<img src='{{site.baseurl}}/images/Kaczmarz_Simple_Sequential.png' loading='lazy' alt="A 2 dimensional figure illustrating perpendicular projections occuring sequentiallyin the kaczmarz algorithm" />
+<img src='{{site.baseurl}}/images/Kaczmarz_Deterministic_Figure2.png' loading='lazy' alt="A second 2 dimensional figure illustrating orthogonal projections of the kaczmarz algorithm"/>
 
+<details>
+<summary>array of coordinate pairs used to generate the figures for the numerically curious.</summary>
+```python
+# Note this can also be done is num_lines > 2 and the trajectory bounces around a lot more...
+# plot is
+#Kaczmarx with Ax=b and:
+# A = array([[-0.12503767,  1.        ],
+#        [ 0.46218237,  1.        ]])
+# b = array([-0.23716145,  2.85519088])
+# [[-2.31761924  4.98789131]
+#  [-1.63867112 -0.44205707]
+#  [-0.0945452   2.89888801]
+#  [ 0.29299827 -0.20052562]
+#  [ 1.40514086  2.20575955]
+#  [ 1.68426551 -0.0265648 ]
+#  [ 2.48527604  1.7065401 ]
+#  [ 2.68631302  0.09872889]
+#  [ 3.26323354  1.34698186]
+#  [ 3.40802859  0.18897052]
+#  [ 3.82355032  1.08801332]
+#  [ 3.92783763  0.25396624]
+#  [ 4.22711336  0.9014936 ]
+#  [ 4.30222534  0.3007788 ]
+#  [ 4.51777596  0.76715447]
+#  [ 4.57187467  0.33449513]
+#  [ 4.72712303  0.67039794]
+#  [ 4.76608714  0.358779  ]
+#  [ 4.87790335  0.60070994]
+#  [ 4.9059669   0.37626924]
+#  [ 4.9865015   0.55051779]]
+
+
+
+# figure 2 Data
+# Kaczmarx with Ax=b and:
+# A = array([[66.92575379,  1.        ],
+#        [-1.07451305,  1.        ]])
+# b = array([-142.79219973,    4.98128477])
+# [[-2.66488801 -2.04264369]
+#  [-2.10319557 -2.03425092]
+#  [-4.47488041  0.17296734]
+#  [-2.1366977   0.20790431]
+#  [-3.37224101  1.35776778]
+#  [-2.15415083  1.3759684 ]
+#  [-2.79781446  1.97499661]
+#  [-2.16324314  1.98447833]
+#  [-2.49856354  2.29654563]
+#  [-2.16797984  2.30148519]
+#  [-2.34266699  2.4640585 ]
+#  [-2.17044745  2.4666318 ]
+#  [-2.26145176  2.55132533]
+#  [-2.17173296  2.5526659 ]
+#  [-2.2191422   2.5967875 ]
+#  [-2.17240266  2.59748588]
+#  [-2.19710078  2.62047129]
+#  [-2.17275154  2.62083512]
+#  [-2.18561818  2.6328095 ]
+#  [-2.1729333   2.63299904]
+#  [-2.17963625  2.63923717]]
+# exact solution is: array([-2.17313095,  2.64622719])
+```
+</details>
 
 To keep things simple I use square 2-dimensional matrices so there are only 2 lines to show.
 The dashed red line indicates the direction of the movenment of each \\( x_k \\).
@@ -116,7 +178,7 @@ where here \\( M \in [0,1] \\) and \\( \beta \in [0, 1) \\). If we set \\( \beta
 usual Kaczmarz algorithm and the \\( y_k \\) tracks the distance between successive points in the iterations.
 
 
-<img src='{{site.baseurl}}/images/Momentum_Kaczmarz_Figure.png' loading='lazy'/>
+<img src='{{site.baseurl}}/images/Momentum_Kaczmarz_Figure.png' loading='lazy' alt="A 2 dimensional example of the momentum variant of the kaczmarz algorithm. Here the trajectory of kaczmarz and momentum are overlaid and we see that the momentum method projections exceed the boundaries of the lines where the kaczmarz algorithm stops. Also, the momentum methods no longer make perpendicular directions because of the momentum term is not a scalar but a vector."/>
 
 One key difference I'll point out here is that with a momentum method the steps can exceed the lines which delineate the
 boundaries in the more standard Kaczmarz steps. Why? The idea is the \\( \beta > 0 \\) makes the point be a moving point
@@ -132,13 +194,13 @@ acceleration methods, both Momentum and NA.
 
 The paper is very well written and contains many empirical examples to develop intuitions on the methods.
 
-# Code To Generate Simulations For Kaczmarz and Momentum Version
+## Code To Generate Simulations For Kaczmarz and Momentum Version
 
+<details>
+<summary>Python code to generate the 2-d Kaczmarz figures</summary>
 ```python
 import matplotlib.pyplot as plt
 import numpy as np
-
-
 
 # Randomly generate an intersection point
 intersection = np.random.uniform(-7, 7, 2)
@@ -229,64 +291,6 @@ if False:
     plt.axvline(0, color='black', linewidth=0.5)
     plt.show()
 
-# Note this can also be done is num_lines > 2 and the trajectory bounces around a lot more...
-# plot is
-#Kaczmarx with Ax=b and:
-# A = array([[-0.12503767,  1.        ],
-#        [ 0.46218237,  1.        ]])
-# b = array([-0.23716145,  2.85519088])
-# [[-2.31761924  4.98789131]
-#  [-1.63867112 -0.44205707]
-#  [-0.0945452   2.89888801]
-#  [ 0.29299827 -0.20052562]
-#  [ 1.40514086  2.20575955]
-#  [ 1.68426551 -0.0265648 ]
-#  [ 2.48527604  1.7065401 ]
-#  [ 2.68631302  0.09872889]
-#  [ 3.26323354  1.34698186]
-#  [ 3.40802859  0.18897052]
-#  [ 3.82355032  1.08801332]
-#  [ 3.92783763  0.25396624]
-#  [ 4.22711336  0.9014936 ]
-#  [ 4.30222534  0.3007788 ]
-#  [ 4.51777596  0.76715447]
-#  [ 4.57187467  0.33449513]
-#  [ 4.72712303  0.67039794]
-#  [ 4.76608714  0.358779  ]
-#  [ 4.87790335  0.60070994]
-#  [ 4.9059669   0.37626924]
-#  [ 4.9865015   0.55051779]]
-
-
-
-# figure 2 Data
-# Kaczmarx with Ax=b and:
-# A = array([[66.92575379,  1.        ],
-#        [-1.07451305,  1.        ]])
-# b = array([-142.79219973,    4.98128477])
-# [[-2.66488801 -2.04264369]
-#  [-2.10319557 -2.03425092]
-#  [-4.47488041  0.17296734]
-#  [-2.1366977   0.20790431]
-#  [-3.37224101  1.35776778]
-#  [-2.15415083  1.3759684 ]
-#  [-2.79781446  1.97499661]
-#  [-2.16324314  1.98447833]
-#  [-2.49856354  2.29654563]
-#  [-2.16797984  2.30148519]
-#  [-2.34266699  2.4640585 ]
-#  [-2.17044745  2.4666318 ]
-#  [-2.26145176  2.55132533]
-#  [-2.17173296  2.5526659 ]
-#  [-2.2191422   2.5967875 ]
-#  [-2.17240266  2.59748588]
-#  [-2.19710078  2.62047129]
-#  [-2.17275154  2.62083512]
-#  [-2.18561818  2.6328095 ]
-#  [-2.1729333   2.63299904]
-#  [-2.17963625  2.63923717]]
-# exact solution is: array([-2.17313095,  2.64622719])
-
 
 # Run Kaczmarz w/ momentum
 x_history, y_history = momentum_kaczmarz(A, b, x0, max_iter=20)
@@ -318,8 +322,11 @@ plt.axhline(0, color='black', linewidth=0.5)
 plt.axvline(0, color='black', linewidth=0.5)
 plt.show()
 ```
+</details>
 
-Note that in the scratch code here you can see the raw values from the two deterministic Kaczmarc plots.
+I will note that you might need to do some small tweaks to this code if you want to plot the deterministic instead of the momentum overlay-e.g. in the if branch.
+The code is meant as an illustration not as something super clean.
+
 You might need to modify the source code here a small bit to generate plots like those in the post.
 You won't get the exact plots because I forgot to set fixed seeds in the random number generators.
 Play around with the code a bit though, you'll see similar figures as you execute the code.
@@ -363,7 +370,7 @@ and using the Kaczmarz as a subroutine.
 The manuscript by []() gives several applications. One that I think is cool is to GUI layouts with hierarchies.
 You can think of CSS flexbox as an example but the Auckland model is more layered IIUC.
 
-<img src='{{site.baseurl}}/images/constraints_ui_layout_figure.jpg' loading='lazy'/>
+<img src='{{site.baseurl}}/images/constraints_ui_layout_figure.jpg' loading='lazy' alt="a simple widget screenshot of yes and not buttons to confirm deletion of notes.txt file and coordinate constraints for the graphical layout which would be used in the kaczmarz algorithm" />
 
 The figure gives you an idea of the mixture of hard/equality vs soft/inequality constraints that go into setting up
 a visualization layout of widgets.

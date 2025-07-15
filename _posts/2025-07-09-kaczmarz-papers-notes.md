@@ -81,8 +81,8 @@ That the lines are defined by vectors can be visualized in 2-dimensions where th
 
 Let's have some visualization in the Figures 1 & 2.
 
-<img src='{{site.baseurl}}/images/Kaczmarz_Simple_Sequential.png'/>
-<img src='{{site.baseurl}}/images/Kaczmarz_Deterministic_Figure2.png'/>
+<img src='{{site.baseurl}}/images/Kaczmarz_Simple_Sequential.png' loading='lazy'/>
+<img src='{{site.baseurl}}/images/Kaczmarz_Deterministic_Figure2.png' loading='lazy'/>
 
 
 To keep things simple I use square 2-dimensional matrices so there are only 2 lines to show.
@@ -116,7 +116,7 @@ where here \\( M \in [0,1] \\) and \\( \beta \in [0, 1) \\). If we set \\( \beta
 usual Kaczmarz algorithm and the \\( y_k \\) tracks the distance between successive points in the iterations.
 
 
-<img src='{{site.baseurl}}/images/Momentum_Kaczmarz_Figure.png'/>
+<img src='{{site.baseurl}}/images/Momentum_Kaczmarz_Figure.png' loading='lazy'/>
 
 One key difference I'll point out here is that with a momentum method the steps can exceed the lines which delineate the
 boundaries in the more standard Kaczmarz steps. Why? The idea is the \\( \beta > 0 \\) makes the point be a moving point
@@ -363,7 +363,7 @@ and using the Kaczmarz as a subroutine.
 The manuscript by []() gives several applications. One that I think is cool is to GUI layouts with hierarchies.
 You can think of CSS flexbox as an example but the Auckland model is more layered IIUC.
 
-<img src='{{site.baseurl}}/images/constraints_ui_layout_figure.jpg'/>
+<img src='{{site.baseurl}}/images/constraints_ui_layout_figure.jpg' loading='lazy'/>
 
 The figure gives you an idea of the mixture of hard/equality vs soft/inequality constraints that go into setting up
 a visualization layout of widgets.

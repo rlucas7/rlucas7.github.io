@@ -85,7 +85,10 @@ Let's have some visualization in the Figures 1 & 2.
 <img src='{{site.baseurl}}/images/Kaczmarz_Deterministic_Figure2.png' loading='lazy' alt="A second 2 dimensional figure illustrating orthogonal projections of the kaczmarz algorithm"/>
 
 <details>
-<summary>array of coordinate pairs used to generate the figures for the numerically curious.</summary>
+  <summary>
+    array of coordinate pairs used to generate the figures for the numerically curious.
+  </summary>
+
 ```python
 # Note this can also be done is num_lines > 2 and the trajectory bounces around a lot more...
 # plot is
@@ -145,6 +148,7 @@ Let's have some visualization in the Figures 1 & 2.
 #  [-2.17963625  2.63923717]]
 # exact solution is: array([-2.17313095,  2.64622719])
 ```
+
 </details>
 
 To keep things simple I use square 2-dimensional matrices so there are only 2 lines to show.
@@ -197,7 +201,11 @@ The paper is very well written and contains many empirical examples to develop i
 ## Code To Generate Simulations For Kaczmarz and Momentum Version
 
 <details>
-<summary>Python code to generate the 2-d Kaczmarz figures</summary>
+  <summary>
+    Python code to generate the 2-d Kaczmarz figures
+  </summary>
+
+
 ```python
 import matplotlib.pyplot as plt
 import numpy as np

@@ -73,7 +73,7 @@ At this point it may seem like a bunch of formulae and calculations but what is 
 Let's recall the cosine of the angle between two lines, in LA terms this is written
 
 $$
-\frac{\langle a, x \rangle}{\| a \|^2} = cosine(\theta),
+\frac{\langle a, x \rangle}{\| a \|^2 \| x \|} = cosine(\theta),
 $$
 where here \\( \theta \\) is the angle between the two lines, \\( a \\) and \\( x \\).
 That the lines are defined by vectors can be visualized in 2-dimensions where the point in 2 space represents a line emanating from the point
@@ -172,7 +172,7 @@ do is take into account these geometries inherent in the space you're trying to 
 The momentum update the authors use is
 
 $$
-x_{k+1} = x_{k} + \frac{ b_{i_k} - \langle x_k, a_{i_k} \rangle}{\|\|a_{i_k} \|\|_2^2} a_{i_k} + M y_k,
+x_{k+1} = x_{k} + \frac{ b_{i_k} - \langle x_k, a_{i_k} \rangle}{\| a_{i_k} \|_2^2} a_{i_k} + M y_k,
 $$
 and
 $$
@@ -351,11 +351,11 @@ We then go back and do the full pass again and again until stopping criteria are
 With the greedy approach they use the following rules
 
 $$
- i_k = \textnormal{argmax}_i \| a_i^Tx_k - b_i \| \ \ \textnormal{MR},
+ i_k = \textnormal{argmax}_i \| a_i^Tx_k - b_i \| \ \ \textnormal{(MR)},
 $$
 or
 $$
- i_k = \textnormal{argmax}_i \| \frac{a_i^Tx_k - b_i}{\|\| a_i \|\|} \| \ \  \textnormal{MD},
+ i_k = \textnormal{argmax}_i \| \frac{a_i^Tx_k - b_i}{\| a_i \|} \| \ \  \textnormal{(MD)},
 $$
 where the MR and MD are for maximal residual and maximal distance, the distance being between \\( x_k \\) and \\( x_{k+1} \\).
 The thing I like about these row selection rules is that they *learn* as the algorithm progresses.

@@ -21,11 +21,18 @@ In this post we'll look at a few papers that study block Kaczmarz in detail.
 
 # Some subtler points
 
+The key focii of the block papers center around a couple ideas: row pavings, sketching, and coherence conditions.
+These are each slightly different methods for selecting subsets of rows so that the eigenvalues or singular values
+of the sub-matrices-what we call the blocks-to be not too large nor too small and the largest and smallest in each block
+to be spread out enough that matrix inversions are numerically stable. Each of the concepts: pavings, sketching, and coherence conditions
+are used in other areas of matrix theory too so I won't go into detail on these ideas but instead refer you to the papers linked here in the post.
 
 # The Bucharest Connection
 
 Basically if you can only read one paper on block Kaczmarz read Ion Necoara's paper.
-In [Faster Randomized Block Kaczmarz algorithms](https://arxiv.org/abs/1902.09946) Necoara does a couple of things:
+In
+<a href="https://arxiv.org/abs/1902.09946" aria-label="Click to navigate to the html landing page on arxiv for the preprint">Faster Randomized Block Kaczmarz algorithms</a>
+Necoara does a couple of things:
 
 1. Relates convergence to the size of the blocks (blocks are the number of rows selected)
 2. Relates convergence to the geometric properties of the blocks
@@ -37,7 +44,7 @@ There are a fair number of details in the paper and it's well worth the time inv
 that are interesting.
 
 One interesting item is the proofs enable unified analysis of static and adaptive step sizes.
-Here step sizes are \( \alpha_k \) from the non-block case and if you set these equal to the same value for all \( k \) then it's not adaptive.
+Here step sizes are \\( \alpha_k \\) from the non-block case and if you set these equal to the same value for all \\( k \\) then it's not adaptive.
 The python code from the previous blog post on Kaczmarz row action methods for a single row at a time all used non-adaptive step sizes.
 
 The starting idea, use Courant-Fischer to bound the operator matrix norm above the smallest eigenvalue, this part is similar to the proof in the non-block case.
@@ -47,11 +54,13 @@ In particular the author's choice of uniform probabilities makes it easier to ha
 If the probabilities were not uniform then I suspect you'd need a measure that summarizes the divergence or the distance between the uniform and the non-uniform as then you're comparing two moving quantities, the probabilities and the eigenvalues of the blocks, making things more complicated. This is why Necoara does the argument this way, to keep things simple and therefore make progress.
 
 That being said, one weird thing that seems to continue is the use of uniform partitions of the rows in the partitioning simulations.
-For example each subset of rows is \(\{J_i : \kappa(l), l = \lfloor (i-1)\frac{m}{l}\rfloor + 1, \dots, \lfloor\frac{m}{l} \rfloor \} \)  where \( i=1,\dots, l \).
+For example each subset of rows is \\( \{J_i : \kappa(l), l = \lfloor (i-1)\frac{m}{l}\rfloor + 1, \dots, \lfloor\frac{m}{l} \rfloor \} \)  where \( i=1,\dots, l \\).
 There are of course other ways to do this but why do I think this way is a bit weird? The reason is that the blocks get selected in situ, e.g. they're selected as they are structured already and if you had some structure it could lead to artifacts. However, these seem like unlikely events and can be easily mitigated by first independently permutating the rows before any partition sampling. Now the reason why this approach to partition sampling is chosen seems to be because of the literative on row pavings.
 
 Row pavings that are called 'good' have the property that all partitions subsets have approximately equal size and this allows you to bound the largest eigenvalue.
-I'm not super familiar on the subject of row pavings but this result is derived in [this paper](https://tropp.caltech.edu/conf/Tro09-Column-Subset.pdf) by Tropp which is reference 26 in the Necoara paper.
+I'm not super familiar on the subject of row pavings but this result is derived in
+<a href="https://tropp.caltech.edu/conf/Tro09-Column-Subset.pdf" aria-label="click through to navigate to Joel Tropp's caltech page where he maintains a copy of the conference proceedings of this manuscript">this paper</a>
+by Tropp which is reference 26 in the Necoara paper.
 
 The other very interesting item in this paper is the proof of Theorem 5.1, the Chebyshev step sizes.
 What is interesting here is that the Chebyshev step sizes polarize the largest and smallest eigenvalues.
@@ -66,7 +75,8 @@ All other proofs I've seen for momentum methods before usually rely on physics i
 The momentum method is used broadly and it's often difficult to justify the physics intuition in a particular application, the Chebyshev argument liberates
 us from this requirement.
 
-This also seems to be related to a matrix inequality known as Meany's inequality.
+This also seems to be related to a matrix inequality known as
+<a href="https://epubs.siam.org/doi/abs/10.1137/0706011?journalCode=sjnaam" aria-label="Click to visit the SIAM landing page for the Meany inequality paper abstract. The paper is paywalled by SIAM.">Meany's inequality</a>.
 
 The importance of finding well conditioned blocks is also illustrated in the proof. Well conditioned blocks correspond to the 'good' pavings, e.g. partitions of the rows
 into subsets where each submatrix has roughly equal largest eigenvalue.
@@ -79,7 +89,7 @@ For the explanation, we need to only look at the randomized block Kaczmarz algor
 $$
 x_{k+1} = x_k - \alpha_k \left(\sum_{i \in J_k}\omega_{i,k} \frac{a_i^Tx_k - b_i}{\|a_i\|^2}a_i\right),
 $$
-where \( \omega_{i,k} \in [0, 1] \) and \( \sum_{i \in J_k} \omega_{i,k}=1 \). So to interpret, this means we calculate the row actions each individually, similar to how
+where \\( \omega_{i,k} \in [0, 1] \\) and \\( \sum_{i \in J_k} \omega_{i,k}=1 \\). So to interpret, this means we calculate the row actions each individually, similar to how
 we would do with a non-block approach and then take the weighted average of these row actions. If each block size does not exceed the number of processors or threads then we can effectively leverage parallel architecture because each row action can be computed in paralle. The beautiful part here is how the theory of row pavings interlocks with modern parallel processing architures to enable faster algorithms.
 
 ## When to use the Block methods studied here?
@@ -92,10 +102,11 @@ Ok so if you read this you might think, ok problem solved what else is there? We
 
 # Another probability measure, volumes
 
-This second paper [Randomized Block Kaczmard with Volume Sampling: Momentum Acceleration and efficient implementation](https://arxiv.org/pdf/2503.13941)
+This second paper
+<a href="https://arxiv.org/pdf/2503.13941" aria-label="Click here to navigate to the arxiv pdf file directly">Randomized Block Kaczmard with Volume Sampling: Momentum Acceleration and efficient implementation</a>
 looks at a different approach to the multi-dimensional probability measure over subsets of rows of the matrix A.
 
-The Authors use subsets of A and form A_SA_S^T and sample proportional to the volume of these submatrices relative to the full matrix.
+The Authors use subsets of rows of \\( A \)) and form \\( A_SA_S^T \\) and sample proportional to the volume of these submatrices relative to the full matrix.
 This is a valid probability measure and they show an interesting algorithm to perform this computation efficiently. They are essentially doing
 a prefix sum over a clever structuring of the sub-matrices and using determinant identities to facilitate the computation.
 
@@ -112,22 +123,24 @@ Two things that are prevalent in their proofs and not seen in the other papers I
 $$
 \frac{K_{s_1}}{K_{s_2}} = \frac{\sum_{i=s_1}^{rank(A) \sigma_i^2(A) }{ \sum_{i=2_2}^{rank(A) \sigma_i^2(A)},
 $$
-where \( 1 \leq s_1 < s2 \leq rank(A) \) and \( \sigma_i^2(A) \) are the singular values of the matrix \( A \).
+where \\( 1 \leq s_1 < s2 \leq rank(A) \\) and \\( \sigma_i^2(A) \\) are the singular values of the matrix \\( A \\).
 In certain cases of random variables the distribution of this fraction will be a beta distribution which is interesting to note because the closed form
 distribution is readily available and the two parameters control the shape of the density and therefore allows us to quantitatively validate the speedup claims.
 I didn't see the authors exploiting this relationship in their simulation studies though.
 
 As an aside here's the details, if you'd like an indication of how this would work as a proof.
-Take the QR decomposition of a matrix of standard Gaussians. The R matrix will then have Chi-squared distribution for the diagonal elements, so \( Q^Tb \) is then
+Take the QR decomposition of a matrix of standard Gaussians. The R matrix will then have Chi-squared distribution for the diagonal elements, so \\( Q^Tb \\) is then
 the right hand side, of the system of linear equations. The eigenvalues here are independent random variables and the distribution of the ratio of the two will have a beta distribution. What does this get you?
-It gives you a somewhat structural understanding of how the choice of \(s_1 < s2 \) will impact your simulations if you sample \( A \) according to a Gaussian distribution.
-Incrementing/decrementing \( s_1 \) or \( s_2 \) can have a large impact on the shape of the distribution in certain regimes.
-Also for large rank matrices \( A \) then the continuous values of the beta random variable can be a helpful metaphor as  a cognitive tool.
+It gives you a somewhat structural understanding of how the choice of \\(s_1 < s2 \\) will impact your simulations if you sample \\( A \\) according to a Gaussian distribution.
+Incrementing/decrementing \\( s_1 \\) or \\( s_2 \\) can have a large impact on the shape of the distribution in certain regimes.
+Also for large rank matrices \\( A \\) then the continuous values of the beta random variable can be a helpful metaphor as a cognitive tool.
 
 ## And now some more notes ...
 
 2. The proofs for the determinantal point process, or volume sampling, have ratios of sums of determinants of submatrices so formulae and proofs appear which
-leverage the [Cauchy-Binet formula for determinants](https://en.wikipedia.org/wiki/Cauchy%E2%80%93Binet_formula) appear prominently in the derivations.
+leverage the
+<a href="https://en.wikipedia.org/wiki/Cauchy%E2%80%93Binet_formula" aria-label="Click to read the Cauchy-Binet formula wikipedia page">Cauchy-Binet formula for determinants</a>
+appear prominently in the derivations.
 
 The authors also have a momentum variant and provide proofs of convergence using homogeneous linear recurrence relations (section 4 of the paper).
 
@@ -141,39 +154,70 @@ can be the case that the preprocessing required for the Cauchy-Binet style pre-c
 
 # Gower and Richtarik
 
-The other work here that is a must read is [Gower and Richtarik](https://arxiv.org/abs/1506.03296) which looks at Kaczmarz from 6 different perspectives.
+Another work here that is a must read is
+<a href="https://arxiv.org/abs/1506.03296" aria-label="Click here to navigate to the landing page for the arxiv preprint of Gower and Richtarik">Gower and Richtarik</a>
+which looks at Kaczmarz from 6 different perspectives.
 All useful perspectives and all providing new insight into the problem.
 
 The 6 viewpoints:
 
 1. sketching
 $$
-
+x_{k+1} = \textnormal{argmin}_{x \in \mathbb{R}^n} \| x - x_k \|^2_B, \textnormal{subject to } S^TAx = S^Tb,
 $$
+where \\( S \\) is a sketching matrix.
 2. optimization
 $$
-
+x_{k+1} = \textnormal{argmin}_{x \in \mathbb{R}^n} \| x - x^* \|^2_B, \textnormal{subject to } x = x_k + B^{-1}A^tS^Ty,
 $$
-
+where \\( y \\) is a freely varying vector of \\( n \\) dimensions.
 3. geometric
 $$
-
+\{x_{k+1}\} = \{x^* + Null(S^TA) \} \cap \{x_{k} + Range(B^{-1}A^TS) \},
+where the two sets on the right are insecting, these two affine spaces
 $$
 4. Algebraic-deterministic
 $$
-
+\[
+\begin{bmatrix}
+    S^TA & 0\\
+    B    & -A^TS
+\end{bmatrix}
+\begin{bmatrix}
+    x \\
+    y
+\end{bmatrix}
+=
+\begin{bmatrix}
+    S^Tb \\
+    Bx_k
+\end{bmatrix}
+\],
 $$
+where here we solve for \\( x \\) on the left hand side repeatedly and recursively to iterate from \\( x_k \\) to \\( x_{k+1} \\).
 5. Algebraic-random
 $$
-
+x_{k+1} = x_k - B^{-1}A^TS (S^TAB^{-1}A^TS)^{\dagger}S^T(Ax_k-b),
 $$
+where here we note the last parenthetical expression is the kth residual and
+the \\( \dagger \\) denotes a generalized inverse.
 6. Analytic-random fixed point
 $$
-
+x_{k+1} - x^* = (I = B^{-1}Z)(x_k - x^*),
 $$
+where \\( Z = A^TS(S^TAB^{-1}A^TS)^{\dagger}S^TA\\).
+
 The paper elucidates on each one of these viewpoints, I've included the equation that corresponds to each viewpoint here in the post.
+The main theorem of the paper proves the equivalence of these 6 perspectives. These types of equivalence proofs are common in linear algebra-and useful.
 If you've worked on problems in this space before, or you read my previous post of row action Kaczmarz, then these perspectives are hopefully clear from the equations.
 
 I will note that the paper is not strictly a block Kaczmarz paper but a perspectives paper, elucidating how the different perspectives suggest and lead to different algorithms and different complexity results.
 
 This paper is worth reading in addition to the paper of Necoara mentioned above if you haven't already read this paper and are interested in these methods.
+
+
+# Stay tuned for part 3
+
+In part 3 I'll look at three papers on acceleration of the Kaczmarz algorithm.
+These three papers look at a line search subproblem, something extremently common in optimization literature
+and here they're applied to Kaczmarz variants both block and non-block.

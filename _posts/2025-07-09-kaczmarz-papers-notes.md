@@ -416,7 +416,7 @@ who is running an optimization routine and encounters an empty (infeasible) cons
 is like a flashlight in the dark, telling the user which constraints to inspect and possibly remove.
 
 An open source benchmarking dataset for IIS is available from
-<a href="https://www.netlib.org/lp/infeas/readme" aria-label="">netlib </a>
+<a href="https://www.netlib.org/lp/infeas/readme" aria-label="click through to go to the readme of the netlib infeasible problems benchmark files">netlib </a>
 
 # Survey paper
 

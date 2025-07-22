@@ -54,7 +54,7 @@ In particular the author's choice of uniform probabilities makes it easier to ha
 If the probabilities were not uniform then I suspect you'd need a measure that summarizes the divergence or the distance between the uniform and the non-uniform as then you're comparing two moving quantities, the probabilities and the eigenvalues of the blocks, making things more complicated. This is why Necoara does the argument this way, to keep things simple and therefore make progress.
 
 That being said, one weird thing that seems to continue is the use of uniform partitions of the rows in the partitioning simulations.
-For example each subset of rows is \\( \{J_i : \kappa(l), l = \lfloor (i-1)\frac{m}{l}\rfloor + 1, \dots, \lfloor\frac{m}{l} \rfloor \} \)  where \( i=1,\dots, l \\).
+For example each subset of rows is \\( \left\{ J_i : \kappa(l), l = \lfloor (i-1)\frac{m}{l}\rfloor + 1, \dots, \lfloor\frac{m}{l} \rfloor \right\} \\)  where \\( i=1,\dots, l \\).
 There are of course other ways to do this but why do I think this way is a bit weird? The reason is that the blocks get selected in situ, e.g. they're selected as they are structured already and if you had some structure it could lead to artifacts. However, these seem like unlikely events and can be easily mitigated by first independently permutating the rows before any partition sampling. Now the reason why this approach to partition sampling is chosen seems to be because of the literative on row pavings.
 
 Row pavings that are called 'good' have the property that all partitions subsets have approximately equal size and this allows you to bound the largest eigenvalue.
@@ -106,7 +106,7 @@ This second paper
 <a href="https://arxiv.org/pdf/2503.13941" aria-label="Click here to navigate to the arxiv pdf file directly">Randomized Block Kaczmard with Volume Sampling: Momentum Acceleration and efficient implementation</a>
 looks at a different approach to the multi-dimensional probability measure over subsets of rows of the matrix A.
 
-The Authors use subsets of rows of \\( A \)) and form \\( A_SA_S^T \\) and sample proportional to the volume of these submatrices relative to the full matrix.
+The Authors use subsets of rows of \\( A \\) and form \\( A_SA_S^T \\) and sample proportional to the volume of these submatrices relative to the full matrix.
 This is a valid probability measure and they show an interesting algorithm to perform this computation efficiently. They are essentially doing
 a prefix sum over a clever structuring of the sub-matrices and using determinant identities to facilitate the computation.
 
@@ -119,10 +119,10 @@ Instead of using Chebyshev polynomials, they use Symmetric polynomials, effectiv
 Two things that are prevalent in their proofs and not seen in the other papers I've read:
 
 1. They get a quantity that allows them to quantify the tradeoff of different block sizes,
+$$
+\frac{ K_{s_1} }{ K_{s_2} } = \frac{\sum_{i=s_1}^{rank(A)} \sigma_i^2(A) }{ \sum_{i=2_2}^{rank(A)} \sigma_i^2(A)},
+$$
 
-$$
-\frac{K_{s_1}}{K_{s_2}} = \frac{\sum_{i=s_1}^{rank(A) \sigma_i^2(A) }{ \sum_{i=2_2}^{rank(A) \sigma_i^2(A)},
-$$
 where \\( 1 \leq s_1 < s2 \leq rank(A) \\) and \\( \sigma_i^2(A) \\) are the singular values of the matrix \\( A \\).
 In certain cases of random variables the distribution of this fraction will be a beta distribution which is interesting to note because the closed form
 distribution is readily available and the two parameters control the shape of the density and therefore allows us to quantitatively validate the speedup claims.
@@ -165,20 +165,23 @@ The 6 viewpoints:
 $$
 x_{k+1} = \textnormal{argmin}_{x \in \mathbb{R}^n} \| x - x_k \|^2_B, \textnormal{subject to } S^TAx = S^Tb,
 $$
+
 where \\( S \\) is a sketching matrix.
+
 2. optimization
 $$
 x_{k+1} = \textnormal{argmin}_{x \in \mathbb{R}^n} \| x - x^* \|^2_B, \textnormal{subject to } x = x_k + B^{-1}A^tS^Ty,
 $$
+
 where \\( y \\) is a freely varying vector of \\( n \\) dimensions.
 3. geometric
+
 $$
 \{x_{k+1}\} = \{x^* + Null(S^TA) \} \cap \{x_{k} + Range(B^{-1}A^TS) \},
-where the two sets on the right are insecting, these two affine spaces
 $$
+where the two sets on the right are insecting, these two affine spaces
 4. Algebraic-deterministic
 $$
-\[
 \begin{bmatrix}
     S^TA & 0\\
     B    & -A^TS
@@ -192,7 +195,6 @@ $$
     S^Tb \\
     Bx_k
 \end{bmatrix}
-\],
 $$
 where here we solve for \\( x \\) on the left hand side repeatedly and recursively to iterate from \\( x_k \\) to \\( x_{k+1} \\).
 5. Algebraic-random
@@ -205,7 +207,7 @@ the \\( \dagger \\) denotes a generalized inverse.
 $$
 x_{k+1} - x^* = (I = B^{-1}Z)(x_k - x^*),
 $$
-where \\( Z = A^TS(S^TAB^{-1}A^TS)^{\dagger}S^TA\\).
+where \\( Z = A^TS(S^TAB^{-1}A^TS)^{\dagger}S^TA \\).
 
 The paper elucidates on each one of these viewpoints, I've included the equation that corresponds to each viewpoint here in the post.
 The main theorem of the paper proves the equivalence of these 6 perspectives. These types of equivalence proofs are common in linear algebra-and useful.

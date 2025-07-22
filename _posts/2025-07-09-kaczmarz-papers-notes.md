@@ -14,7 +14,9 @@ tags:
 
 Note: this post contains my study of several papers which are linked here in the blog post.
 
-The paper [The Kaczmarz algorithm, row action methods, and statistical learning algorithms](https://faculty.sites.iastate.edu/esweber/files/inline-files/KaczmarzSGDrevised.pdf)
+The paper
+
+<a href="https://faculty.sites.iastate.edu/esweber/files/inline-files/KaczmarzSGDrevised.pdf" aria-label="Click to read the pdf file of the paper">The Kaczmarz algorithm, row action methods, and statistical learning algorithms</a>
 s a Contemporary Mathematics, 2018 paper that looks at both Kaczmarz and related problems.
 
 ## Key points of the paper

@@ -147,12 +147,30 @@ All useful perspectives and all providing new insight into the problem.
 The 6 viewpoints:
 
 1. sketching
-2. optimization
-3. geometric
-4. Algebraic-deterministic
-5. Algebraic-random
-6. Analytic-random fixed point
+$$
 
+$$
+2. optimization
+$$
+
+$$
+
+3. geometric
+$$
+
+$$
+4. Algebraic-deterministic
+$$
+
+$$
+5. Algebraic-random
+$$
+
+$$
+6. Analytic-random fixed point
+$$
+
+$$
 The paper elucidates on each one of these viewpoints, I've included the equation that corresponds to each viewpoint here in the post.
 If you've worked on problems in this space before, or you read my previous post of row action Kaczmarz, then these perspectives are hopefully clear from the equations.
 

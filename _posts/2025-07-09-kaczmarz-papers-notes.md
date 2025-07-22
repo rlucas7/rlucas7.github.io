@@ -164,11 +164,11 @@ orthogonal projection.
 
 # Kaczmarz With Momentum
 
-The paper [RANDOMIZED KACZMARZ WITH GEOMETRICALLY
-SMOOTHED MOMENTUM](https://arxiv.org/pdf/2401.09415) is an obvious approach after having visualized the deterministic
-teps in the plots.
+The paper <a href="https://arxiv.org/pdf/2401.09415" aria-label="Click through to read the pdf arxiv manuscript ">Randomized Kaczmarz Wwith Geometrically Smoother Momentum</a>
+is an obvious approach after having visualized the deterministic steps in the plots.
 
-[Momentum methods](https://distill.pub/2017/momentum/) have been around for awhile and the nice thing that they
+<a href="https://distill.pub/2017/momentum/" aria-label="Click through to read a distill publication describing momentum methods"> Momentum methods</a>
+have been around for awhile and the nice thing that they
 do is take into account these geometries inherent in the space you're trying to manoever.
 
 The momentum update the authors use is
@@ -343,8 +343,8 @@ Play around with the code a bit though, you'll see similar figures as you execut
 
 # Greedy Kaczmard
 
-The paper [Convergence Rates for Greedy Kaczmarz Algorithms,
-and Faster Randomized Kaczmarz Rules Using the Orthogonality Graph](https://www.auai.org/uai2016/proceedings/papers/77.pdf)
+The paper <a href="https://www.auai.org/uai2016/proceedings/papers/77.pdf" aria-label="Click to read the published paper in the UAI 2016 proceedings">Convergence Rates for Greedy Kaczmarz Algorithms,
+and Faster Randomized Kaczmarz Rules Using the Orthogonality Graph </a>
 
 Looks at two row selection rules that are deterministic but greedy and update as we move through the space.
 In the simple Kaczmarz algorithm we update (project) onto rows \{0, 1, ..., # rows - 1\} successively.
@@ -396,10 +396,18 @@ You can also use this Kaczmarz method too, if you know how these phase I methods
 
 To solve an optimization problem with an iterative routine you typically need to have a valid starting point.
 The identification of excessive constraints so that the problem has no valid starting point is called the IIS problem and
-was introduced in [Gleeson and Ryan](https://www.math.ucdavis.edu/~deloera/MISC/LA-BIBLIO/trunk/RyanJennifer2.pdf) and also studied by [Chinneck and Dravnieks](https://www.sce.carleton.ca/faculty/chinneck/docs/ChinneckDravnieks.pdf) an ORSA Journal of Computing paper from 1991.
+was introduced in
+<a href="https://www.math.ucdavis.edu/~deloera/MISC/LA-BIBLIO/trunk/RyanJennifer2.pdf" aria-label="click to read the paper from a UC Davis professors linear algebra bibliography papge">Gleeson and Ryan and also studied by
+<a href="https://www.sce.carleton.ca/faculty/chinneck/docs/ChinneckDravnieks.pdf" aria-label="Click through to read the pdf posted in Chinneck's facult page at Carleton university in Ottowa">Chinneck and Dravnieks</a>
+an ORSA Journal of Computing paper from 1991.
 
-The solution in the Chinneck and Dravnieks paper is a deterministic procedure conceptually related to the [Big-M method](https://en.wikipedia.org/wiki/Big_M_method).
-Using the ORM or Hildreth approach, [Jamil, Chen, and Cloninger](https://arxiv.org/abs/1409.2902) look at Graphical user interface (GUI) layouts with hard and soft constraints and compare the randomized approaches finding large speedups.
+The solution in the Chinneck and Dravnieks paper is a deterministic procedure conceptually related to the
+<a href="https://en.wikipedia.org/wiki/Big_M_method" aria-label="Click through to read the wikipedia page describing the big-M method to initial linear programming problems">Big-M method</a>.
+Using the ORM or Hildreth approach,
+<a href="https://arxiv.org/abs/1409.2902" aria-label="Click here to go to the arxiv landing page for the Jamil, Chen, and Cloninger paper where you can read in pdf or the experimental html format">
+Jamil, Chen, and Cloninger</a>
+
+look at Graphical user interface (GUI) layouts with hard and soft constraints and compare the randomized approaches finding large speedups.
 
 An alternative to the IIS is the MFS problem where you seek to find the largest subset of linear constraints such that the feasible set of points is non-empty.
 
@@ -407,12 +415,13 @@ The application not withstanding, the approach in the paper may be leveraged for
 who is running an optimization routine and encounters an empty (infeasible) constraint set. For large scale systems of affine hyperplace constraints, this approach
 is like a flashlight in the dark, telling the user which constraints to inspect and possibly remove.
 
-An open source benchmarking dataset for IIS is available from [netlib](https://www.netlib.org/lp/infeas/readme).
+An open source benchmarking dataset for IIS is available from
+<a href="https://www.netlib.org/lp/infeas/readme" aria-label="">netlib </a>
 
 # Survey paper
 
-The paper [Survey of a class of iterative row-action methods:
-The Kaczmarz method](https://arxiv.org/pdf/2401.02842)
+The paper
+<a href="https://arxiv.org/pdf/2401.02842" aria-label="Click here to read the pdf preprint of the survey paper on the Arxiv">Survey of a class of iterative row-action methods: The Kaczmarz method</a>
 has even more variants of this algorithm. The manuscript includes applications and parallelization strategies.
 
 # Stay Tuned For More

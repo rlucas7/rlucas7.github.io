@@ -1,7 +1,7 @@
 ---
 title: 'Notes on papers regarding block Kaczmarz algorithms'
 date: 2025-07-17
-permalink: /posts/2025/07/blog-post-3
+permalink: /posts/2025/07/block-kaczmarz
 tags:
   - algorithms
   - probability
@@ -54,7 +54,13 @@ In particular the author's choice of uniform probabilities makes it easier to ha
 If the probabilities were not uniform then I suspect you'd need a measure that summarizes the divergence or the distance between the uniform and the non-uniform as then you're comparing two moving quantities, the probabilities and the eigenvalues of the blocks, making things more complicated. This is why Necoara does the argument this way, to keep things simple and therefore make progress.
 
 That being said, one weird thing that seems to continue is the use of uniform partitions of the rows in the partitioning simulations.
-For example each subset of rows is \\( \left\{ J_i : \kappa(l), l = \lfloor (i-1)\frac{m}{l}\rfloor + 1, \dots, \lfloor\frac{m}{l} \rfloor \right\} \\)  where \\( i=1,\dots, l \\).
+For example each subset of rows is
+
+$$
+ \left{ J_i : \kappa(l), l = \lfloor (i-1) \frac{m}{l} \rfloor + 1, \dots, \lfloor \frac{m}{l}\rfloor \right},
+$$
+
+where \\( i=1,\dots, l \\).
 There are of course other ways to do this but why do I think this way is a bit weird? The reason is that the blocks get selected in situ, e.g. they're selected as they are structured already and if you had some structure it could lead to artifacts. However, these seem like unlikely events and can be easily mitigated by first independently permutating the rows before any partition sampling. Now the reason why this approach to partition sampling is chosen seems to be because of the literative on row pavings.
 
 Row pavings that are called 'good' have the property that all partitions subsets have approximately equal size and this allows you to bound the largest eigenvalue.

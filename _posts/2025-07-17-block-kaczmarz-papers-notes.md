@@ -57,7 +57,7 @@ That being said, one weird thing that seems to continue is the use of uniform pa
 For example each subset of rows is
 
 $$
- \left{ J_i : \kappa(l), l = \lfloor (i-1) \frac{m}{l} \rfloor + 1, \dots, \lfloor \frac{m}{l}\rfloor \right},
+ \left \{ J_i : \kappa(l), l = \lfloor (i-1) \frac{m}{l} \rfloor + 1, \dots, \lfloor \frac{m}{l}\rfloor \right \},
 $$
 
 where \\( i=1,\dots, l \\).

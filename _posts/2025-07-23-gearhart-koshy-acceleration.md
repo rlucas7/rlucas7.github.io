@@ -15,9 +15,9 @@ tags:
 This is the third post in a series of posts on Kaczmarz algorithm.
 Previous blog posts are
 
-<a href="" aria-label="">here-TODO</a>
+<a href="https://rlucas7.github.io/posts/2025/07/Kaczmarz-row-actions" aria-label="Click here to read the first post, focusing on kaczmarz">Intro row-action methods, Kaczmarz (post #1)</a>
 and
-<a href="" aria-label="">here-TODO</a>,
+<a href="https://rlucas7.github.io/posts/2025/07/block-kaczmarz" aria-label="Click here to read the second post, focusing on block kaczmarz">Block Kaczmarz (post #2)</a>,
 and these describe single row and block Kaczmarz algorithm papers respectively.
 If you're not already familiar with Kaczmarc and the block variants, feel free to check those posts out as well.
 
@@ -32,7 +32,7 @@ will yield a decrease in the objection function.
 $$
 f(x_k + \alpha_k g_k).
 $$
-Here notice that \(( g_k \\) is the gradient at the point \\( x_k \\) and \\( f(\cdot) \\) is the objective function we're trying
+Here notice that \\( g_k \\) is the gradient at the point \\( x_k \\) and \\( f(\cdot) \\) is the objective function we're trying
 to optimize. For this problem if \\( g_k \\) and \\( x_k \\) are known then \\( \alpha_k \\) is the only unknown and this function
 is a scalar function in \\( \alpha_k \\). Also we said \\( f( \cdot ) \\) is convex so this means that there is at least 1 minimal
 value inside a range \\( [a,b] \\) for \\( f( \cdot ) \\). One of the oldest and most robust methods for solving this is binary search.
@@ -112,8 +112,30 @@ My hunch is that the one half term can be explained by an expectation over a sui
 
 The paper also includes some computational examples which study varying the Friedrich's angle between the subspaces which acts as a bound on the convergence rate.
 The smaller the Friedrich angle, the faster the convergence of the Gearhart-Koshy method when compared against a non-accelerated method.
+
 # Notes on Block Gearhart-Koshy
 
-In <a href="" aria-label="">post 2</a> of the series we looked at a couple methods that partition the rows and then do Kaczmarz updates over these subsets.
+In
+<a href="https://rlucas7.github.io/posts/2025/07/block-kaczmarz" aria-label="Click here to read the second post, focusing on block kaczmarz">post 2</a>,
+of the series we looked at a couple methods that partition the rows and then do Kaczmarz updates over these subsets.
 
+One of the papers surveyed in that post looked at what is called volume sampling.
+Volume sampling defines the probability as the relative size of the determinants of the sampled block submatrix to full matrix.
 
+In that prior paper the focus was on was to analyze the block Kaczmarz and understand when the block method accelerates and when it is overly
+complicated without improving runtime, or is potentially numerically unstable.
+
+Here the idea is slightly different, Janosch Rieger in
+<a href="https://arxiv.org/abs/2201.10118" aria-label="Click to read the abstract on the arxiv page for the preprint">Generalized Gearhat-Koshy acceleration for the Kaczmarz method</a>, shows how the Gearhart-Koshy acceleration method can be applied to block Kaczmarz and the minimization becomes over the distances between the subspaces of the blocks.
+
+The formulae that come out of the analysis are volume sampling formula, sorry for the spoiler. It's a super interesting result though because
+it says something about the volume sampling approach for blocks, it's also an acceleration method.
+
+# Krylov Subspaces and Gearhart-Koshy
+
+The final of the three papers to discuss on Gearhart-Koshy acceleration methods for Kaczmarz is the paper
+<a href="https://arxiv.org/abs/2311.18305" aria-label="Click here to navigate to the arxiv landing page for the Gearhart-Koshy Krylov subspace method preprint">Generalized Gearhart-Koshy acceleration is a Krylov subspace method</a>.
+
+This paper looks at the Kaczmarz method and looks at the Gearhart-Koshy acceleration. The authors show that for a square and linear system, the method works in exact arithmetic. Nothing numerical analysis style here. They show that there is also a Gram-Schmidt style orthogonalization approach and that both the Krylov perspective and the Gram-Schmidt perspective converge in typical problems.
+
+Note that here the vector spaces here must be linear and not affine. Krylov subspaces are *linear* subspaces of the vector space.

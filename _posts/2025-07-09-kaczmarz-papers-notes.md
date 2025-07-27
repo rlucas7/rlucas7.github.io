@@ -492,6 +492,8 @@ plt.axvline(0, color='black', linewidth=0.5)
 plt.show()
 ```
 
+</details>
+
 Here are two plots of the Minimal Residual (MR) method and Minimal Distance (MD) methods take from the paper.
 The figures overlay the same Kaczmarz iterations from the simple approach against the two greedy methods.
 

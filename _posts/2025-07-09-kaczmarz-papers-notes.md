@@ -375,6 +375,150 @@ $$
 And using \\( f(x) \leq \tau \\) where we vary \\( \tau \\) on each iteration, basically transforming the L_1 constrained L_1 optimization problem into a univariate binary search
 and using the Kaczmarz as a subroutine.
 
+<details>
+  <summary>
+    Python code to generate the 2-d Kaczmarz figures
+  </summary>
+
+
+```python
+## scratch code for greedy Kaczmarz
+
+
+import matplotlib.pyplot as plt
+import numpy as np
+
+
+# Kaczmarz algorithm
+def kaczmarz(A, b, x0, max_iter=20):
+    x = x0
+    history = [x0]
+    for k in range(max_iter):
+        i = k % A.shape[0]
+        ai = A[i, :]
+        bi = b[i]
+        x = x + (bi - np.dot(ai, x)) / np.linalg.norm(ai)**2 * ai
+        history.append(x)
+    return np.array(history)
+
+# Greedy-Kaczmarz algorithm
+from heapq import *
+
+def greedy_kaczmarz(A, b, x0, max_iter=20, max_residual=True):
+    x = x0
+    x_history = [x0]
+    num_rows = A.shape[0]
+    rows = [(-abs(np.dot(A[row,:], x) - b[row]).item(), row) for row in range(num_rows)]
+    row_history = [rows]
+    heapify(rows)
+    for k in range(max_iter):
+        i = rows[0][1] # row of largest abs residual
+        ai = A[i, :]
+        bi = b[i]
+        x = x + (bi - np.dot(ai, x)) / np.linalg.norm(ai)**2 * ai
+        if max_residual:
+            # this corresponds to max distance rule (eqn 3) in paper
+            rows = [(-abs(np.dot(A[row,:], x) - b[row]).item(), row) for row in range(num_rows)]
+        else:
+            # this corresponds to max distance rule (eqn 4) in paper
+            rows = [(-abs(np.dot(A[row,:], x) - b[row]).item() / np.linalg.norm(A[row,:], ord=2), row) for row in range(num_rows)]
+        heapify(rows)
+        x_history.append(x)
+        row_history.append(rows)
+    return np.array(x_history), row_history
+
+
+# Define the lines: y = m(x - x0) + y0
+def line(x, m, x0, y0):
+    return m * (x - x0) + y0
+
+# Randomly generate an intersection point
+intersection = np.random.uniform(-7, 7, 2)
+
+# Randomly generate line angles through the intersection point
+num_lines = 3
+angles = np.random.uniform(0, np.pi, num_lines)
+slopes = np.tan(angles)
+
+A = np.column_stack((-slopes, np.ones(num_lines)))
+b = -slopes * intersection[0] + intersection[1]
+
+# Plot the lines
+x_vals = np.linspace(-10, 10, 400)
+for m in slopes:# Construct A and b from the lines
+    plt.plot(x_vals, line(x_vals, m, intersection[0], intersection[1]), label=f'Constraint Line')
+
+
+# Initial starting guess
+x0 = np.random.uniform(-5, 5, 2) # this is the first value and is copied into the kaczmarz history
+
+# Run Deterministic Kaczmarz algorithm
+history = kaczmarz(A, b, x0, max_iter=20)
+# Run Kaczmarz w/greedy choice
+## NOTE: change `max_residual=False` to `max_residual=True` to toggle the two greedy choices
+## from the greedy Kaczmarz paper
+max_residual=False
+x_history, row_history = greedy_kaczmarz(A, b, x0, max_iter=20, max_residual=max_residual)
+# Plot the iterations
+plt.plot(history[:, 0], history[:, 1], color='red', linestyle='--', label='Kaczmarz Iterations')
+plt.scatter(x_history[:, 0], x_history[:, 1], color='black', zorder=5)
+plt.plot(x_history[:, 0], x_history[:, 1], color='black', linestyle='--', label='Greedy Kaczmarz Iterations')
+# Mark the intersection point
+plt.scatter(intersection[0], intersection[1], color='green', marker='*', s=200, label='Solution', zorder=10)
+
+# Set aspect ratio 1:1
+plt.gca().set_aspect('equal', adjustable='box')
+#plt.plot(x_vals, line(x_vals, m, intersection[0], intersection[1]), label=f')
+#plt.plot(x_vals, line(x_vals, m, intersection[0], intersection[1]), label=f'Line', color="purple")
+
+# these are the X-Y coordinated at each iteration of Kaczmarz
+
+xy_lim = 8
+# exact = np.linalg.inv(A) @ b
+# print(f"exact solution is: {exact!r}")
+# Add labels, legend, and grid
+plt.xlabel('x')
+plt.ylabel('y')
+plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left') # puts the legend outside of plot-top left
+plt.grid()
+if max_residual:
+	plt.title('Kaczmarz vs Greedy Max Residual Algorithm in $\mathbb{R}^2$')
+else:
+	plt.title('Kaczmarz vs Greedy Max Distance Algorithm in $\mathbb{R}^2$')
+plt.xlim(-xy_lim, xy_lim)
+plt.ylim(-xy_lim, xy_lim)
+plt.axhline(0, color='black', linewidth=0.5)
+plt.axvline(0, color='black', linewidth=0.5)
+plt.show()
+```
+
+Here are two plots of the Minimal Residual (MR) method and Minimal Distance (MD) methods take from the paper.
+The figures overlay the same Kaczmarz iterations from the simple approach against the two greedy methods.
+
+From the figures you can see that steps which are longer are selected as the projection steps.
+Once you are in a range close to the solution point the greedy choice seems to matter less unless you need a lot
+of precision for the vector entries.
+
+These two greedy methods vary slightly in terms of the order or projections.
+
+For these plots you'll notice I generated 3 rows rather than 2 for the 2 dimensional examples, the reason is to inject
+some variation into the selection of the rows, if there were only 2 rows then the projects would still alternate.
+I could've made the simulations have more the 3 rows but I wanted the figures to be relatively clear in terms of
+illustrating the behavior for the greedy Kaczmarc variants.
+
+<img src='{{site.baseurl}}/images/greedy_kaczmarz_max_residual.png' loading='lazy' alt="a plot overlaying the steps of the kaczmarz algorithm and the steps taken by the greedy max residual rule." />
+<img src='{{site.baseurl}}/images/greedy_kaczmarz_max_residual2.png' loading='lazy' alt="a second plot overlaying the steps of the kaczmarz algorithm and the steps taken by the greedy max residual rule. This example uses different problem data to illustrate the behavior further." />
+
+
+<img src='{{site.baseurl}}/images/greedy_kaczmarz_max_distance.png' loading='lazy' alt="a plot overlaying the steps of the kaczmarz algorithm and the steps taken by the greedy max distance rule." />
+<img src='{{site.baseurl}}/images/greedy_kaczmarz_max_distance2.png' loading='lazy' alt="a second plot overlaying the steps of the kaczmarz algorithm and the steps taken by the greedy max distance rule. This example uses different problem data to illustrate the behavior further." />
+
+In both pairs of plots we see that often the trajectory of the simple Kaczmarz and the greedy variant follow similar patterns with perhaps one or two steps differening.
+These steps which differ, if early enough in the iteration process can have a large difference on the solution.
+Therefore, if you have an application where something close enough will suffice and the close enough is somewhat flexible, these greedy methods are worth looking into further.
+
+
+
 # Application To GUI Layouts
 
 The manuscript by []() gives several applications. One that I think is cool is to GUI layouts with hierarchies.
@@ -430,6 +574,13 @@ In the papers surveyed in this post all the Kaczmarz algorithms were single row 
 In the row action algorithm nomenclature, this means they operate on one and only one row of the A matrix at a time.
 There are also variations that look at more than a single row. I'll put those up in a future post though to keep things
 from getting too long here.
+
+# Part 1 of A series
+
+This blog post is part 1 of a series of blog posts on Kaczmarz algorithms.
+
+The <a href="https://rlucas7.github.io/posts/2025/07/block-kaczmarz" aria-label="Click here to go to the second blog post which discusses block Kaczmarz">second blog post</a>discusses block variants of Kaczmarz.
+The <a href="https://rlucas7.github.io/posts/2025/07/gearhart-koshy-acceleration" aria-label="Click here to go to the third blog post which discusses Gearhart-Koshy line search accelerations">third blog post</a>discusses the Gearhart-Koshy line search acceleration of Kaczmarz.
 
 
 <script src="https://giscus.app/client.js"

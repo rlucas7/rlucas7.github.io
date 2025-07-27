@@ -75,7 +75,7 @@ At this point it may seem like a bunch of formulae and calculations but what is 
 Let's recall the cosine of the angle between two lines, in LA terms this is written
 
 $$
-\frac{\langle a, x \rangle}{\| a \|^2 \| x \|} = cosine(\theta),
+\frac{\langle a, x \rangle}{\| a \| \| x \|} = cosine(\theta),
 $$
 where here \\( \theta \\) is the angle between the two lines, \\( a \\) and \\( x \\).
 That the lines are defined by vectors can be visualized in 2-dimensions where the point in 2 space represents a line emanating from the point
@@ -362,7 +362,9 @@ $$
 where the MR and MD are for maximal residual and maximal distance, the distance being between \\( x_k \\) and \\( x_{k+1} \\).
 The thing I like about these row selection rules is that they *learn* as the algorithm progresses.
 This learning comes from the inclusion of the \\( x_k \\) values in the calculation.
-The tradeoff is that the learning comes at a cost, for each update when we learn new row entering ranks, we incur sortation cost of \\( \mathcal{O}(rlog(r)) \\) where \\( r \\) is the number of rows in the matrix \\( A \\).
+The tradeoff is that the learning comes at a cost, for each update when we learn new row entering residuals or distances, we incur a search/sortation cost of \\( \mathcal{O}(r) \\) where \\( r \\) is the number of rows in the matrix \\( A \\).
+This is the cost of looking for the new max residual or max distance row.
+This is because the state in the solution space changes so that you must recalculate all of the residuals or distances change when you update.
 
 This paper also mentions that SLI can be solved with the greedy approach too.
 By now we know that this is pretty straightforward.

@@ -10,14 +10,17 @@ tags:
   - paper-notes
 ---
 
-# Kaczmrz Algorithm and Related Algorithm Notes
+# Kaczmarz Algorithm and Related Algorithm Notes
 
 Note: this post contains my study of several papers which are linked here in the blog post.
+Each of the papers are linked via non-paywalled versions where I could find them at the time of writing.
+The post also includes some plots to illustrate the variety of approaches to the Kaczmarz algorithm via simulated problem data.
+Codes to generate the plots are also provided and serve to illustrate the differences via programmatic implementations.
 
 The paper
 
 <a href="https://faculty.sites.iastate.edu/esweber/files/inline-files/KaczmarzSGDrevised.pdf" aria-label="Click to read the pdf file of the paper">The Kaczmarz algorithm, row action methods, and statistical learning algorithms</a>
-s a Contemporary Mathematics, 2018 paper that looks at both Kaczmarz and related problems.
+is a Contemporary Mathematics, 2018 paper that looks at both Kaczmarz and related problems.
 
 ## Key points of the paper
 

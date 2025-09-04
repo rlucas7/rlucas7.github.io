@@ -1,8 +1,14 @@
-# Academic Pages
+# Rlucas7 Site courtesy of Academic Pages
 
 ![pages-build-deployment](https://github.com/academicpages/academicpages.github.io/actions/workflows/pages/pages-build-deployment/badge.svg)
 
-Academic Pages is a Github Pages template for academic websites.
+Academic Pages is a Github Pages template for academic-style websites.
+
+This repo houses the source for my blog and site: https://rlucas7.github.io/
+
+The pages displayed on the site have corresponding content here-if you've found a typo or error on the blog and want to correct it, please open an issue which documents the error or better yet open a pull request to fix the issue.
+
+What follows beneath is the default docs for getting started with a academic style github pages site. 
 
 # Getting Started
 

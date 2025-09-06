@@ -58,17 +58,16 @@ use strings separated by commas-but there are other ways this could be done too.
 
 For example with \\( n=10 \\) and \\(k=5 \\), the string:
 
-```
-1,2,3,1,4,3,3,1,1,5
-```
+`1,2,3,1,4,3,3,1,1,5`
+
 indicates the first non-empty subset contains elements at indices 0, 3, 7, 8. The second non-empty subset contains the sole element at index 1, the third contains three items, those of indices 2, 5, 6. The fourth contains the sole item at index 4, and the fifth the sole item at index 9. We need a comma delimiter for when \\( k > 9 \\) and \\( n > 10 \\) because otherwise we would be unable to distinguish certain digits.
 
 Here is some source code you can use to generate similar random partitions of 10 items into 5 non-empty subsets. They won't all be the same as the one above.
 
 <details>
   <summary>
-A small-ish example of using Stirling numbers to generate a random
-partition uniformly across all partitions with k non-empty subsets.
+        A small-ish example of using Stirling numbers to generate a random
+        partition uniformly across all partitions with k non-empty subsets.
   </summary>
 
 ```python
@@ -135,7 +134,8 @@ and \\( k \\) values though.
 
 <details>
   <summary>
-Scale the arguments of the algorithm up, let n=1000, k=50.
+        Scale the arguments of the algorithm up a bit. 
+        Use `n=1000` and  `k=50` and sample some partitions.
 </summary>
 
 ```python3
@@ -172,11 +172,11 @@ cost is the one time setup of the Stirling triangle. If you look at the string s
 
 <details>
   <summary>
-Code to put the random partition generation into a function for reusability.
+       Code to put the random partition generation into
+       a function for reusability.
 </summary>
 
 ```python
-
 def random_partition(n, k, number_samples):
     ## one time costs
     N = np.array([[i] for i in range(1, n+1)])
@@ -218,11 +218,11 @@ The code to generate the timings:
 
 <details>
   <summary>
-   Timeit timing code for the larger random partition sample example.
+   Timeit timing code for the larger
+   random partition sample example.
   </summary>
 
 ```python
-
 setup_code = """
 import numpy as np
 from scipy.special import stirling2

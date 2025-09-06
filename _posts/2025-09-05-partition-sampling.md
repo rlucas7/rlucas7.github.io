@@ -65,7 +65,13 @@ indicates the first non-empty subset contains elements at indices 0, 3, 7, 8. Th
 
 Here is some source code you can use to generate similar random partitions of 10 items into 5 non-empty subsets. They won't all be the same as the one above.
 
-```python3
+<details>
+  <summary>
+A small-ish example of using Stirling numbers to generate a random
+partition uniformly across all partitions with k non-empty subsets.
+  </summary>
+
+```python
 import numpy as np
 from scipy.special import stirling2
 
@@ -118,12 +124,19 @@ print(assignments)
 codeword = ','.join(str(val) for val in assignments)
 ```
 
+</details>
+
 Note that if you want to generate several random samples of partitions you can reuse the same Stirling triangle, it's a one time computational cost for a given \\( n \\).
 
 # Stress Test The Sampler
 
 We can use the `scipy.special` implementation for `stirling2` and work backwords from the last element in the list, now we'll use larger \\( n \\)
 and \\( k \\) values though.
+
+<details>
+  <summary>
+Scale the arguments of the algorithm up, let n=1000, k=50.
+</summary>
 
 ```python3
 # let's stress test this one, bigger n,k values
@@ -152,10 +165,15 @@ print(assignments)
 codeword = ','.join(str(val) for val in assignments)
 ```
 
+</details>
+
 The above code runs in under a couple of seconds on my macbook air so it's pretty fast. Most of the
 cost is the one time setup of the Stirling triangle. If you look at the string stored in `codeword` it will be clear now why we needed the commas in the codeword string.
 
-We'll put this into a little function to make it easier to use later:
+<details>
+  <summary>
+Code to put the random partition generation into a function for reusability.
+</summary>
 
 ```python
 
@@ -191,11 +209,17 @@ def random_partition(n, k, number_samples):
 random_partition(1000, 50, 10000)
 ```
 
+</details>
 
 So this is pretty handy but how long does it take?
 In practice the cost is usually a second or three to setup the triangle and then very fast to generate the samples. I setup a small bit of code to time things experimentally.
 
 The code to generate the timings:
+
+<details>
+  <summary>
+   Timeit timing code for the larger random partition sample example.
+  </summary>
 
 ```python
 
@@ -237,12 +261,19 @@ time_str = timeit.timeit(stmt="random_partition(1000, 50, 10000)", setup=setup_c
 print(f"Time for string join (string stmt): {time_str:.6f} seconds")
 ```
 
+</details>
 
 empirically for \\( n=1000 \\) and \\( k=50 \\) to generate 10000 random partitions takes approximately 25 seconds. There are many many more partitions than the 10,000 sampled but this gives you a way to see some of them and use them for downstream computations.
 
 One example of this is to start with different initial partitions of some data in a clustering algorithm and determine how sensitive the end result is to the choice of initial partition.
 
 Not all clustering algorithms support custom initializations. One example that does is `KMeans` in scikit-learn. The `init` argument will take a callable input. The implementation of something like this is shown below:
+
+<details>
+  <summary>
+    Example use in a clustering initialization. Use the technique to test
+    the sensitivity of the clustering method to the initialization.
+  </summary>
 
 ```python
 ## example custom init using KMeans.
@@ -313,6 +344,7 @@ print("\nFinal cluster centers (from KMeans):")
 print(kmeans.cluster_centers_)
 ```
 
+</details>
 
 IF you rerun the `kmeans.fit(X)` call using the same `X` input a second time and inspect the cluster centers across multiple runs you may notice cycling
 behavior where the vectors are the same set of 4 rows but the values of the rows of the cluster center matrix are permutated.datasets

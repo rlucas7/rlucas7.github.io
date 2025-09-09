@@ -7,33 +7,34 @@ In this blog post, we will explore the r-Stirling numbers of the second kind, a 
 
 ## What are r-Stirling Numbers of the Second Kind?
 
-The Stirling numbers of the second kind, denoted as $S(n,k)$, count the number of ways to partition a set of $n$ elements into $k$ non-empty subsets.
+The Stirling numbers of the second kind, denoted as $$S(n,k)$$, count the number of ways to partition a set of $n$ elements into $k$ non-empty subsets.
 
-The r-Stirling numbers of the second kind, denoted as $S_r(n,k)$, add a constraint: they count the number of partitions of a set of $n$ elements into $k$ non-empty subsets, with the condition that the first $r$ elements must be in distinct subsets.
+The r-Stirling numbers of the second kind, denoted as $$S_r(n,k)$$, add a constraint: they count the number of partitions of a set of $n$ elements into $k$ non-empty subsets, with the condition that the first $r$ elements must be in distinct subsets.
 
-[Andrei Broder](https://en.wikipedia.org/wiki/Andrei_Broder), a distinguished scientist at Google, PhD student of Don Knuth, and Information Retrieval researcher wrote an paper that describes their properties. These numbers are used in various hashing calculations including in [Bloom filters](https://en.wikipedia.org/wiki/Bloom_filter).
+[Andrei Broder](https://en.wikipedia.org/wiki/Andrei_Broder), a distinguished scientist at Google, PhD student of Don Knuth, and Information Retrieval researcher, wrote a paper that describes their properties. These numbers are used in various hashing calculations including in [Bloom filters](https://en.wikipedia.org/wiki/Bloom_filter).
 
 ## A Recursive Formula
 
 The r-Stirling numbers of the second kind can be calculated using the following recurrence relation for $n > r$:
 
-$S_r(n, k) = k \cdot S_r(n-1, k) + S_r(n-1, k-1)$
+$$ S_r(n, k) = k \cdot S_r(n-1, k) + S_r(n-1, k-1) $$
 
 with the following base cases:
-- $S_r(n, k) = 0$ if $k < r$ or $n < k$
-- $S_r(r, r) = 1$
+- $$ S_r(n, k) = 0 $$ if
+$$ k < r or n < k $$
+- $$ S_r(r, r) = 1 $$
 
 ## Generating an ndarray of r-Stirling Numbers with Cross Recurrence
 
-We can use this function to generate a 2D NumPy array of r-Stirling numbers for a given range of `n` and `k` starting with with `r=1`.
+We can use this function to generate a 2D NumPy array of r-Stirling numbers for a given range of \\( n \\) and \\( k \\) starting with with \\( r=1 \\).
 
-Once we have the `r=1` face to generate r-Stirling numbers is to use a cross recurrence formula from Broder's paper "The r-Stirling Numbers". This method allows us to build the table of r-Stirling numbers for a given `r` from the table for `r-1`.
+Once we have the \\( r=1 \\) face, to generate r-Stirling numbers is to use a cross recurrence formula from Broder's paper "The r-Stirling Numbers". This method allows us to build the table of r-Stirling numbers for a given \\( r \\) from the table for \\( r-1 \\).
 
 The cross recurrence formula is as follows:
 
-$S_r(n,k) = S_{r-1}(n-1, k-1) - (r - 1) S_{r-1}(n-1, k)$
+$$ S_r(n,k) = S_{r-1}(n, k) - (r - 1) S_{r-1}(n-1, k) $$
 
-We can use this recurrence to build a 3D NumPy array of r-Stirling numbers. We start with the `r=1` face, which corresponds to the standard Stirling numbers of the second kind, and then iteratively build the faces for `r=2, 3, ...`. For simplicity of indexing we include a face of all `0`.
+We can use this recurrence to build a 3D NumPy array of r-Stirling numbers. We start with the \(( r=1 \\) face, which corresponds to the standard Stirling numbers of the second kind, and then iteratively build the faces for \\( r=2, 3, ... \\). For simplicity of indexing we include a face of all 0 values.
 
 ### Python Implementation with Cross Recurrence
 
@@ -75,11 +76,11 @@ print(f"\nr-Stirling numbers for r=3:")
 print(rs[3])
 ```
 
-These faces are given in the paper by Broder so we can check the values against Table 1 where we notice the values match up-they do.
+These faces are given in the paper by Broder so we can check the values against Table 1, where we notice the values match up; they do.
 
-Feel free to use this as a starting point for your r-Stirling number of the second kind research. It's very fast calculations and done in exact arithmetic.
+Feel free to use this as a starting point for your r-Stirling number of the second kind research. The calculations are very fast and are done in exact arithmetic.
 
 One place where r-Stirling numbers arise is in [Coupon Collecting](https://en.wikipedia.org/wiki/Coupon_collector%27s_problem). This is a problem that arises when you have a set of items, each with an associated probability of being collected.
 While the classical solution calculates the expected value of the number of trials to collect all items, there is a way, using the r-Stirling numbers of the second kind, to calculate the probability distribution exactly. The combinatorial calculations are derived in [a recent paper](https://ajc.maths.uq.edu.au/pdf/78/ajc_v78_p376.pdf) by Greg Morrow of the University of Colorado, Colorado Springs.
 
-There are many variants of r-Stirling numbers. The [associated r-Stirling number of the second kind](https://cdm.ucalgary.ca/article/view/68674/54579) enumerate partitions of \(( n \)) elements into non-empty subsets where each subset has at least \(( r \)) items, e.g. if \(( r>1 \)) then there are no isolated/singleton sets. These are popular in practical clustering applications where you do not want isolated clusters, instead you want to have a minimum number of points per cluster. This is a criterion often desired by businesses and other organizations using clustering.
+There are many variants of r-Stirling numbers. The [associated r-Stirling number of the second kind](https://cdm.ucalgary.ca/article/view/68674/54579) enumerate partitions of \\( n \\) elements into non-empty subsets where each subset has at least \\( r \\) items, e.g., if \\( r>1 \\) then there are no isolated/singleton sets. These are popular in practical clustering applications where you do not want isolated clusters, instead you want to have a minimum number of points per cluster. This is a criterion often desired by businesses and other organizations using clustering.

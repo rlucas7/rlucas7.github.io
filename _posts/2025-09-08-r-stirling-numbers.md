@@ -7,7 +7,7 @@ In this blog post, we will explore the r-Stirling numbers of the second kind, a 
 
 ## What are r-Stirling Numbers of the Second Kind?
 
-The Stirling numbers of the second kind, denoted as $$ S(n,k) $$, count the number of ways to partition a set of $n$ elements into \\( k \\) non-empty subsets.
+The Stirling numbers of the second kind, denoted as $$ S(n,k) $$, count the number of ways to partition a set of \\( n \\) elements into \\( k \\) non-empty subsets.
 
 The r-Stirling numbers of the second kind, denoted as $$ S_r(n,k) $$, add a constraint: they count the number of partitions of a set of \\( n \\) elements into \\( k \\) non-empty subsets, with the condition that the first \\( r \\) elements must be in distinct subsets.
 

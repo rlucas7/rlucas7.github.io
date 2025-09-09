@@ -7,34 +7,33 @@ In this blog post, we will explore the r-Stirling numbers of the second kind, a 
 
 ## What are r-Stirling Numbers of the Second Kind?
 
-The Stirling numbers of the second kind, denoted as $$S(n,k)$$, count the number of ways to partition a set of $n$ elements into $k$ non-empty subsets.
+The Stirling numbers of the second kind, denoted as $$ S(n,k) $$, count the number of ways to partition a set of $n$ elements into \\( k \\) non-empty subsets.
 
-The r-Stirling numbers of the second kind, denoted as $$S_r(n,k)$$, add a constraint: they count the number of partitions of a set of $n$ elements into $k$ non-empty subsets, with the condition that the first $r$ elements must be in distinct subsets.
+The r-Stirling numbers of the second kind, denoted as $$ S_r(n,k) $$, add a constraint: they count the number of partitions of a set of \\( n \\) elements into \\( k \\) non-empty subsets, with the condition that the first \\( r \\) elements must be in distinct subsets.
 
 [Andrei Broder](https://en.wikipedia.org/wiki/Andrei_Broder), a distinguished scientist at Google, PhD student of Don Knuth, and Information Retrieval researcher, wrote a paper that describes their properties. These numbers are used in various hashing calculations including in [Bloom filters](https://en.wikipedia.org/wiki/Bloom_filter).
 
 ## A Recursive Formula
 
-The r-Stirling numbers of the second kind can be calculated using the following recurrence relation for $n > r$:
+The r-Stirling numbers of the second kind can be calculated using the following recurrence relation for \\( n > r \\):
 
 $$ S_r(n, k) = k \cdot S_r(n-1, k) + S_r(n-1, k-1) $$
 
 with the following base cases:
-- $$ S_r(n, k) = 0 $$ if
-$$ k < r or n < k $$
+- $$ S_r(n, k) = 0 $$ if \\( k < r \\) or \\( n < k \\)
 - $$ S_r(r, r) = 1 $$
 
 ## Generating an ndarray of r-Stirling Numbers with Cross Recurrence
 
 We can use this function to generate a 2D NumPy array of r-Stirling numbers for a given range of \\( n \\) and \\( k \\) starting with with \\( r=1 \\).
 
-Once we have the \\( r=1 \\) face, to generate r-Stirling numbers is to use a cross recurrence formula from Broder's paper "The r-Stirling Numbers". This method allows us to build the table of r-Stirling numbers for a given \\( r \\) from the table for \\( r-1 \\).
+Once we have the \\( r=1 \\) face, to generate r-Stirling numbers is to use a cross recurrence formula from Broder's paper [The r-Stirling Numbers](http://infolab.stanford.edu/pub/cstr/reports/cs/tr/82/949/CS-TR-82-949.pdf). This method allows us to build the table of r-Stirling numbers for a given \\( r \\) from the table for \\( r-1 \\).
 
 The cross recurrence formula is as follows:
 
 $$ S_r(n,k) = S_{r-1}(n, k) - (r - 1) S_{r-1}(n-1, k) $$
 
-We can use this recurrence to build a 3D NumPy array of r-Stirling numbers. We start with the \(( r=1 \\) face, which corresponds to the standard Stirling numbers of the second kind, and then iteratively build the faces for \\( r=2, 3, ... \\). For simplicity of indexing we include a face of all 0 values.
+We can use this recurrence to build a 3D NumPy array of r-Stirling numbers. We start with the \\( r=1 \\) face, which corresponds to the standard Stirling numbers of the second kind, and then iteratively build the faces for \\( r=2, 3, ... \\). For simplicity of indexing we include a face of all 0 values.
 
 ### Python Implementation with Cross Recurrence
 

@@ -83,3 +83,11 @@ One place where r-Stirling numbers arise is in [Coupon Collecting](https://en.wi
 While the classical solution calculates the expected value of the number of trials to collect all items, there is a way, using the r-Stirling numbers of the second kind, to calculate the probability distribution exactly. The combinatorial calculations are derived in [a recent paper](https://ajc.maths.uq.edu.au/pdf/78/ajc_v78_p376.pdf) by Greg Morrow of the University of Colorado, Colorado Springs.
 
 There are many variants of r-Stirling numbers. The [associated r-Stirling number of the second kind](https://cdm.ucalgary.ca/article/view/68674/54579) enumerate partitions of \\( n \\) elements into non-empty subsets where each subset has at least \\( r \\) items, e.g., if \\( r>1 \\) then there are no isolated/singleton sets. These are popular in practical clustering applications where you do not want isolated clusters, instead you want to have a minimum number of points per cluster. This is a criterion often desired by businesses and other organizations using clustering.
+
+## Stirling number Related materials
+
+1. A list of problems solved using [r-Stirling numbers](https://pnp.mathematik.uni-stuttgart.de/iadm/Riedel/mse.html#coupstir) by Marko Reidel.
+
+2. A [paper from NIST](https://tsapps.nist.gov/publication/get_pdf.cfm?pub_id=903775) on calculating false positive probabilities in Bloom filters.
+
+3. A paper from [Pat Morin at Carleton in Ottawa](https://cglab.ca/~morin/publications/ds/bloom-submitted.pdf) on false positive probabilities of Bloom filters.

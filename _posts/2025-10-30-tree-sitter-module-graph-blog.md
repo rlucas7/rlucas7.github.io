@@ -16,19 +16,19 @@ You might be wondering why you would care about this information so here is some
 
 In source code (static) analysis it's common to build graphs of various data produced by parsing code.
 The data from the code parsing is used to construct a graph and from the graph you can make certain analyses.
-One example you could imagine is the "unused import" notice inside a file in your IDE, or across in an entire
-project. How would you determine that the import is unused? Firsy you'd need to confirm that the import is not used
-in this file. Then you'd want to check the other files as well.
+One example you could imagine is the "unused import" notice inside a file in your IDE, or across an entire
+project. How would you determine that the import is unused? First you'd need to confirm that the import is not used
+in this file. If you also care if it's used in the project but outside of the file itself you'd check other files too.
 
 By building a graph where each node is a file and each node has some properties like imported items as done here,
 we can do a BFS or a DFS of the source files of the project (the graph) and determine whether the import is used transitively.
 If it is then we might want to push the import to the particular module which uses the import directly.
 Doing so makes our code more readable and also more efficient because we eschew unnecessary imports.
 
-
 Some other applications:
 
 1) Change impact analysis tooling
+
 2) Library splitting/partitioning
 
 
@@ -50,8 +50,9 @@ I'm on a mac so I do:
 ```sh
 brew install tree-sitter-cli
 tree-sitter init-config # creates a file under $HOME/.tree-sitter/config.json
-
 ```
+
+Other package managers (linux/windows) should support treee sitter too.
 
 ## a tutorial on building module graphs
 Suppose you want to access all the imported libraries or modules in a .py file.

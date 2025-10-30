@@ -317,9 +317,10 @@ even if you're not building them yourself, it is still worthwhile to understand 
 
 For more on debugging a file's parse tree you can use the playground.
 
-Ok so we've gone through basic setup of a grammar in tree-sitter using a simplified version of markdown.
+Ok so we've gone through basic setup of a parser of an existing grammar in tree-sitter.
 There are lots of other tips and tricks you can pick up as you start working on tree-sitter grammars.
-For example the playground is a helpful tool for debugging `grammr.js` files.
+For example the playground is a helpful tool for debugging why a file did not extract what you wanted.
+They're also handy for building out custom grammars and debugging `grammar.js` files.
 
 ```sh
 tree-sitter build --wasm

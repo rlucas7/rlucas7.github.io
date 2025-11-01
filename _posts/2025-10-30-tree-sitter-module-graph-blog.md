@@ -194,7 +194,7 @@ from __future__ import annotations
 ```
 
 at the top of the example.py file and rerun you'll notice the statement will not be picked up.
-Again why not? Here the answer is yet another import statement kind. This kind is called a future import.
+Again, why not? Here the answer is yet another import statement kind. This kind is called a future import.
 You should see something like:
 
 ```sh
@@ -207,7 +207,7 @@ You should see something like:
 ... other output similar to previous tree is elided ...
 ```
 But subsequent nodes in the tree will have different line start and end rows, they'll be offset by 1-2 lines or more depending
-on how you put future import statement into the python file.
+on how you put the future import statement into the python file.
 Ok for the third type of import we'll add yet another query, it looks like this:
 
 ```sh
@@ -235,11 +235,11 @@ example.py
 ```
 
 Now this gives us what we want which is for each python file we want to be able to determine which other packages or files
-are imported in a given file. The module graph is then a graph of the python files (the nodes in the graph) and the import
+are imported. The module graph is then constructed as a graph of the python files (the nodes in the graph) and the import
 statements represent edges to other files (modules is the python nomenclature for a `.py` file). When you build a module
 graph you can add further logic to restrict the nodes and edges to only the files in the package or repository you are studying
 via walking the root of the current package directory and building a set out of those files and some additional logic to filter
-known packages, both builtings like `collections` and 3rd party ones like `numpy`. There would be some work to get that filtering logic
+known packages, both builtins like `collections` and 3rd party ones like `numpy`. There would be some work to get that filtering logic
 to a reasonable state but this is the general approach.
 
 To generate a short list of the imports on any given python file you can then run
@@ -250,7 +250,7 @@ tree-sitter query tsp_queries.scm example.py | grep capture | awk -F: '{sub("sta
 replacing the `example.py` with the python file you want to parse. The `handler.py` is a simple cli tool I wrote to make this
 bit of parsing simpler.
 
-Executing the line above will puth the stuff into a pipe splittable format that can be sent into
+Executing the line above will put the stuff into a pipe splittable format that can be sent into
 use by a downstream application via a pipe delimited file.
 
 For building a change impact tool you'd want some fully fledged programming language like python
@@ -286,9 +286,9 @@ and the output looks like:
 (8, 0)|(8, 18)|`import numpy as np`
 ```
 
-These can be stored somewhere like a database easily or they can be processed by an application.
+These can be stored somewhere like a database or they can be processed by an application.
 Basically your data would be the collection of these rows of values, one collection per file for the project.
-The next thing is to build the graph. Once the graph is built then question is which files changed and
+The next thing is to build the graph. Once the graph is built then the question is which files changed and
 of those files that changed which are potentially impacted? Using this information you can reduce the number
 of files that need testing and thereby save costs, reduce noise from flaky tests, and accelerate testing.
 
@@ -310,9 +310,11 @@ this logic is already built in but for most it is not. Before embarking on imple
 with consequences, it is worthwhile to see if the programming language and available testing harnesses will support a
 change impact analysis. Also check your devops tooling, it is also common for change impact analysis to be a supported
 feature there too. If you're already using a tool which supports this then use the tool rather than reinventing the
-wheel. Unless you're goal is to understand which is what we're trying to build out with this-and subsequent-tree sitter
-blog posts. Parser generators and language technologies in general are very handy tools to have and to understand,
-even if you're not building them yourself, it is still worthwhile to understand the basics of the technology.
+wheel. Unless your goal is to understand how a change impact tool works. Our goal here was explanation at a conceptual
+level which is why we did not build out a full demo. Also with this-and subsequent-tree sitter blog posts my personal
+goal is to demonstrate the tool and its' capabilities. Parser generators and language technologies in general are very
+handy tools to have and to understand, even if you're not building them yourself, it is still worthwhile to understand
+the basics of the technology.
 
 ## One last helpful note for debugging
 
@@ -321,7 +323,7 @@ For more on debugging a file's parse tree you can use the playground.
 Ok so we've gone through basic setup of a parser of an existing grammar in tree-sitter.
 There are lots of other tips and tricks you can pick up as you start working on tree-sitter grammars.
 For example the playground is a helpful tool for debugging why a file did not extract what you wanted.
-They're also handy for building out custom grammars and debugging `grammar.js` files.
+Playground is also handy for building out custom grammars and debugging `grammar.js` files.
 
 ```sh
 tree-sitter build --wasm
@@ -329,12 +331,12 @@ tree-sitter playground
 ```
 
 provided you have docker running on your machine you will see something open at `http://127.0.0.1:8000/`.
-This is basically a local playground instance for you to write an example file and see what the parse of that
-looks like using the latest built grammar.
+This is basically a local playground instance for you to write an example file and see what the parse tree
+of that file looks like.
 
-This is especially helpful when your building out custom parsers for your language but can also be helpful
-if you have some malformatted source code and you're trying to understand why the parse tree that is being
-generated is not what you want or expect.
+This is especially helpful when your building out custom grammars and parsers for a language. It can also
+be helpful if you have some malformatted source code and you're trying to understand why the parse tree
+that is being generated but is not generating the parse tree what you want or expect.
 
 A fuller list of the useful
 `npm` commands you'll find [here](https://github.com/Inferara/tree-sitter-inference/blob/639510ac55d561a0f81717d3e27e476d00422485/package.json#L30).

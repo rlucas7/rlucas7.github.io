@@ -25,7 +25,7 @@ probability distributions, linear algebra, optimization routines, and much more.
 This is not an unreasonable question if you program in a language other than Python.
 In Python NumPy and SciPy are pretty core libraries for doing things in science.
 Other libraries that are also core would include Pandas and PyMC, both were in
-the cohort with me.
+the cohort with me. Large projects like PyTorch have their own foundation.
 
 One of the other maintainers, Ralf had already participated in a security training
 for SciPy through TideLift. Another maintainer, Andrew had received the email

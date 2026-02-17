@@ -16,7 +16,7 @@ projects that are critical to the security of the software supply chain.
 The fund is designed to help maintainers of open source projects that are widely
 used and have a significant impact on the security of the software ecosystem.
 
-For those who don't know, I'm a maintainer of SciPy, a library for scientific
+For those who don't know, I'm a [maintainer of SciPy](https://scipy.org/teams/#maintainers), a library for scientific
 python applications. The library provides fundamental algorithms for this like
 probability distributions, linear algebra, optimization routines, and much more.
 
@@ -58,6 +58,10 @@ the advances with AI are challenging the existing licensing structure.
 on using `codeql` something GitHub offers for doing static analysis that can
 determine both memory leaks in non Garbage Collected (GC) languages like C,
  as well as other enumerable security exploits in GC-ed languages like Python.
+
+The social aspect was also great. I like that I can put names, voices, and faces
+to the projects that I've used in the past and will use in the future. I learned
+a lot from the group of maintainers in the cohort too.
 
 I learned much more and I'm favoring brevity in this post.
 

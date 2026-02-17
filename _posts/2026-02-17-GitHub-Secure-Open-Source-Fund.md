@@ -198,6 +198,10 @@ given that you might be relying on the code in your critical path.
 Note that the above paragraph applies equally to philanthropies, NGOs,
 and Governments too.
 
+If you don't feel you have the information necessary for understanding
+your open source dependencies send me an email-I can help you get the
+information you need.
+
 # If you are a developer, a teacher of an OSS course, or a student
 
 If you are onsidering contributing, or having your students contribute

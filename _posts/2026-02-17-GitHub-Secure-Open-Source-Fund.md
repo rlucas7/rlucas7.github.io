@@ -10,9 +10,9 @@ tags:
 
 # Summary
 
-In September of 2025, SciPy became part of the GitHub Secure Open Source Fund.
-This is a program that provides financial support to open source projects that
-are critical to the security of the software supply chain.
+In September of 2025, SciPy took part in the GitHub Secure Open Source Fund.
+This is a program that provides financial support to maintainers of open source
+projects that are critical to the security of the software supply chain.
 The fund is designed to help maintainers of open source projects that are widely
 used and have a significant impact on the security of the software ecosystem.
 
@@ -20,7 +20,7 @@ For those who don't know, I'm a maintainer of SciPy, a library for scientific
 python applications. The library provides fundamental algorithms for this like
 probability distributions, linear algebra, optimization routines, and much more.
 
-# Why was SciPy selected?
+# How and Why was SciPy selected?
 
 This is not an unreasonable question if you program in a language other than Python.
 In Python NumPy and SciPy are pretty core libraries for doing things in science.
@@ -28,12 +28,18 @@ Other libraries that are also core would include Pandas and PyMC, both were in
 the cohort with me.
 
 One of the other maintainers, Ralf had already participated in a security training
-for SciPy through tidelift. Another maintainer, Andrew had received the email
-from github and forwarded to the maintainers, this is how I learned about and
+for SciPy through TideLift. Another maintainer, Andrew had received the email
+from GitHub and forwarded to the maintainers, this is how I learned about and
 after emails with the other maintainers we determined it would be good for me
-to attend to learn about the security aspects. Andrew wasn't able to attend
+to attend to learn more about security. Andrew wasn't able to attend
 because he has a full time role and the sprint itself was a full time thing
 over most of the month of September.
+
+SciPy is used as a dependency in many systems across the technosphere.
+Many packages in python use it as a dependency and some of the routines
+are used for calculating metrics inside various software systems. If
+there was something that broke because of SciPy, we learn about it
+pretty quickly.
 
 # What I learned during the program
 
@@ -42,27 +48,30 @@ forgotten rather than the material not being excellent. Here are the 3 key thing
 I took away as learnings from the course
 
 1. The security reporting ecosystem, how vulnerabilities are reported, what info
-is included in the report and the mechanics.
+is included in the report, and the mechanics.
 
 2. Licensing, I'm not a lawyer but someone who works on OSS licensing for many
 years gave us a good overview of the current ecosystem of OSS licenses and how
 the advances with AI are challenging the existing licensing structure.
 
 3. Static analysis and fuzzing. For Static analysis we had a great training
-on using `codeql` something github offers for doing static analysis that can
+on using `codeql` something GitHub offers for doing static analysis that can
 determine both memory leaks in non Garbage Collected (GC) languages like C,
  as well as other enumerable security exploits in GC-ed languages like Python.
 
-In reality I learned much more but I'm favority brevity here.
+I learned much more and I'm favoring brevity in this post.
 
 # How we strengthened security in SciPy
 
-1. Enabled the require 2-Factor Authentication 2FA for maintainers
+1. Enabled the require Multi-Factor Authentication (MFA) for maintainers
 
 2. Established CodeQL scans for the entire scipy repo. Scanning in
 python and C languages. The CodeQL system is setup by language so
 if you're a multi-language repo like SciPy then this is what you
 need to do.
+
+3. Setup a security page in our docs and update our SECURITY.md
+file to guide readers to this doc before reporting a vulnerability.
 
 We had some of these items in place already but not all.
 Before the program completed we activated all 5.
@@ -75,7 +84,7 @@ If you've got an OSS project you maintain here is the playbook of
 the core 5 and the additional 4 with links to how to set them up
 and any background reference material.
 
-Establishe the core 5 security items
+## Establish the core 5 security items
 
 1. Activate [Secret scanning](https://docs.github.com/en/code-security/how-tos/secure-your-secrets/detect-secret-leaks/enabling-secret-scanning-for-your-repository)
 
@@ -103,7 +112,7 @@ Dependabot is super handy, if you maintain a repo and you don't have dependabot 
 it keep you notified of updates to dependencies in a risk prioritized manner, it will even open PRs to your repo to update
 the dependencies-super handy.
 
-Additional 4 items
+## Additional 4 items
 
 1. Setup [SECURITY.md](https://docs.github.com/en/code-security/how-tos/report-and-fix-vulnerabilities/configure-vulnerability-reporting/adding-a-security-policy-to-your-repository), place this file in root of your project's repo
 
@@ -111,7 +120,7 @@ This establishes the project security policies etc. there may be links out from 
 
 2. Establish an [Incident Response Plan](https://github.com/resources/articles/what-is-incident-response#creating-an-incident-response-plan) (IRP)
 
-These may be public or private but they're useful to think about before the stress of an active vulnerability impacts your decision making.
+These may be public or privatem, they're useful to think about before the stress of an active vulnerability impacts your decision making.
 
 3. Activate [MFA](https://docs.github.com/en/authentication/securing-your-account-with-two-factor-authentication-2fa/configuring-two-factor-authentication) for all maintainers and major contributors
 
@@ -129,16 +138,20 @@ We determined after some months of having these scans run that
 what we'd like is something more focused on memory allocations
 for the C and C++ code that we have in the SciPy repo. One of
 the really nice things about the program is I have a slack channel
-with the GitHub team and within a day was able to get super helpful
+with the GitHub team and within no time at all, I was able to get super helpful
 guidance on the steps I'll need to do to setup the more focused
 memory scans. These make more sense for a library like SciPy which
 makes very few network calls.
 
 In fact this was a learning in itself,
 the security aspects of libraries which make or do network calls
+(e.g. things like the cli tool curl, or the python requests library)
 are different in focus from those which provide data processing
-routines like SciPy. As a software platform GitHub needs to
-balance there default settings to cover both kinds of libraries.
+routines like SciPy with few if any network calls.
+
+As a software platform GitHub needs to balance their default settings
+to cover both kinds of libraries and they have support for these sort of
+customizations even if they aren't defaults.
 
 I also worked to update our docs so that we have an actual
 security file now. Given that SciPy maintainers aren't security
@@ -150,7 +163,8 @@ up bandwidth on things that aren't high priority.
 
 As a result of turning on the scanning we identified a couple
 vulnerabilities which were remediated. I won't say much more
-about this except that I learned a bit in this process too.
+about this except that I learned a bit in the remdiation process
+too.
 
 # What's next for SciPy?
 

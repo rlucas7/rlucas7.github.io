@@ -17,6 +17,10 @@ of midtraining data in foundation models.
 The arxiv version is
 <a href="https://arxiv.org/abs/2510.14865" aria-label="Click to navigate to the html landing page on arxiv for the preprint">here</a>
 
+The first author of the paper, Emmy Liu is at Carnegie Mellon right now and
+maintains a site with other works too. Her site is
+<a href="https://nightingal3.github.io/" aria-label="Click to navigate to the first author's site">here</a>
+
 # Section 2
 The paper has an excellent Section 2
 that clearly defines key terms like pretraining, mid-training, finetuning,

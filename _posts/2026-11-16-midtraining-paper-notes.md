@@ -30,7 +30,11 @@ so that the reader is on the same page as the authors.
 
 # Sections 3-6
 
-Largely a collection of experiments, conducted way beyond Chinchilla optimal,
+Largely a collection of experiments, conducted way beyond
+<a href="https://arxiv.org/abs/2203.15556"
+aria-label="Click to navigate to the Hoffman et al, Chinchilla paper">
+Chinchilla optimal
+</a>
 to ensure stability for introducing the midtraining data. All the experiments
 were done with a single GPU which is pretty impressive.
 
@@ -45,9 +49,9 @@ optimal they are but the calculations are straightforward from the paper.
 The models were 70-410 million and a 1 billion parameter model on the second
 draft. The authors used a 128 billion token dataset, on approximately 61,000
 update steps. Using the \\( C=6ND \\) relationship where N is parameter count
-and D is the dataset size in tokens. Then using the heuristic of \((D=20N\))
+and D is the dataset size in tokens. Then using the heuristic of \\(D=20N\\)
 also from the chinchilla paper, after rearranging numbers, the 410 million
-parameter model is \\( D=20*4.1*10^8 = 8.2 \\) billion tokens at chinchilla
+parameter model is \\( D=20 \times 4.1 \times 10^8 = 8.2 \\) billion tokens at chinchilla
 optimal. This tells us that the 128 billion token dataset is over 15 times the
 chinchilla optimal size, eg. a lot past chinchilla optimal.
 
@@ -66,10 +70,10 @@ cosine similarity, Jaccard distance, and Jensen-Shannon similarity, giving only
 slightly more weight to cosine than the remaining two.
 
 $$
-    proximity(d_1,d_2) = 0.4 cosine(d_1, d2) + 0.3 Jaccard(d_1, d_2) + 0.3 Jensen-Shannon(d_1, d_2),
+    prox(d_1,d_2) = 0.4 \times cos(d_1, d2) + 0.3 \times Jaccard(d_1, d_2) + 0.3 \times JensenShannon(d_1, d_2),
 $$
 
-where \\(i=1,2 d_i \\) are two distinct datasets.
+where \\(d_i, i=1,2 \\) are two distinct datasets.
 
 The authors mention in the conclusion, Section 9,  that extending to more
 domains would be a nice follow up.
@@ -128,7 +132,7 @@ natural follow up studies-beyond those the authors indicated in the conclusion.
 The experiments all used adamW, using pretty reasonable hyperparameter settings
 for the experiments.
 
-There is not answer to the question of the optimizer. I'm curious if there
+There is no answer to the question of if the optimizer matters. I'm curious if there
 are impacts of adamW vs Muon. If you're reading this blog post and you've done
 those experiments and are willing to share, please drop me an email. I'd love
 to add them (with attribution) to this blog post.

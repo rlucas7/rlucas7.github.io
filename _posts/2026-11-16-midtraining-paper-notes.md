@@ -88,7 +88,7 @@ The key finding of proximity of the data to the downstream task is that it
 makes the performance on the downstream task better.
 
 
-<img src='{{site.baseurl}}/images/cleaned_similarity_matrix_compact_rightbar.pdf'
+<img src='{{site.baseurl}}/images/cleaned_similarity_matrix_compact_rightbar.png'
 loading='lazy'
 alt="An example similarity matrix between pre/midtrain and postraining datasets"
 />
@@ -117,7 +117,7 @@ center on the later weights in the model than the earlier layers but the dynamic
 changes if you look at SFT. With SFT the earlier layers seem to learn the changes
 to the domain.
 
-<img src='{{site.baseurl}}/images/cka_summary_c4_410m.pdf' loading='lazy' alt="four heat plots of increasing model layers showing changes based on midtraining, and structured fine tuning"/>
+<img src='{{site.baseurl}}/images/cka_summary_c4_410m.png' loading='lazy' alt="four heat plots of increasing model layers showing changes based on midtraining, and structured fine tuning"/>
 
 # Some answered and still unanswered questions
 
@@ -162,7 +162,7 @@ larger scales. There seems to be some emergent behavior at the 1 billion model
 as evidenced by the increased correlations but it's not clear if this is noise
 or something indicative of an emergent phenomena.
 
-<img src='{{site.baseurl}}/images/bridge_distance_analysis.pdf' loading='lazy' alt="four correlation plots of increasing model sizes measuring the advantage relative to the downstream task based on proximity"/>
+<img src='{{site.baseurl}}/images/bridge_distance_analysis.png' loading='lazy' alt="four correlation plots of increasing model sizes measuring the advantage relative to the downstream task based on proximity"/>
 
 # Summary
 

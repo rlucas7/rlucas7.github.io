@@ -116,9 +116,9 @@ with the given response.
 
 TODO: add anchor tags
 
-<img src='{{site.baseurl}}/images/IMG_2528.jpeg'
+<img src='{{site.baseurl}}/images/IMG_2757.jpeg'
 loading='lazy'
-alt="An example similarity matrix between pre/midtrain and postraining datasets"
+alt="figure 3, classification of SFT methods"
 />
 
 ## Response Generation

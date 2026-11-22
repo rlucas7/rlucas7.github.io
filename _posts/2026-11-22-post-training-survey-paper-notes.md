@@ -55,3 +55,28 @@ a inference time methos, which is something that is
 done separately and is not really considered a
 training stage anymore, because the model weights
 are usually not updated in TTC.
+
+# Motivation for post-training scaling
+
+pre-training the part where LLM's process large 
+amounts of text from the Internet is expensive
+and consumes a large proportion, typically over
+90% of the LLM training computation. Post-traing
+according to this paper account for less than 1%
+ of the training computation and despite counting
+for only a small percentage of the computation 
+in training, largely contribute to the performance
+of the model on downstream tasks. Given the
+positives of computation and the impact of the
+techniques, it seems sensible to study this area
+in more detail to determine if more computation
+should be added, and catalog the various techniques that
+are used to improve the performance in this stage.
+
+# What is SFT?
+
+# What is RL?
+
+# What is TTC?
+
+

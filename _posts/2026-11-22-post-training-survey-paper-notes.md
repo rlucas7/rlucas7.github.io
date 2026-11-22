@@ -138,7 +138,10 @@ capability of the model.
 
 # What is RL?
 
-
+<img src='{{site.baseurl}}/images/IMG_2758.jpeg'
+loading='lazy'
+alt="figure 4, classification of RL methods"
+/>
 
 # What is TTC?
 

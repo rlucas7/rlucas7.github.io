@@ -73,6 +73,14 @@ in more detail to determine if more computation
 should be added, and catalog the various techniques that
 are used to improve the performance in this stage.
 
+within each of the three areas, SFT, RL, and TTC
+the author's classify methods into common methods
+and scalable methods so in total there are three 
+techniques and then common versus scalable methods
+so there's a total of six different leaf nodes of
+the classification tree. Then the authors look at 
+specific papers in those areas as well as more finely
+ detailed distinctions within each areas.
 # What is SFT?
 
 # What is RL?

@@ -116,6 +116,11 @@ with the given response.
 
 TODO: add anchor tags
 
+<img src='{{site.baseurl}}/images/IMG_2528.jpeg'
+loading='lazy'
+alt="An example similarity matrix between pre/midtrain and postraining datasets"
+/>
+
 ## Response Generation
 
 SFT uses a collection of instructions and responses

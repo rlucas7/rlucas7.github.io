@@ -43,4 +43,15 @@ proceedings which means it was likely written in
 </details>
 
 
-rict cutover. This is something
+The survey paper categorizes post training scaling
+into three methodologies: (1) supervised fine-tuning (SFT)
+(2) reinforcement learning (RL) and (3) test time compute TTC.
+These are now largely three different areas of post
+training in a broad sense now and we typically call supervise fine-tuning
+part of mid training and RL is often use synonously with post-training
+although there are various ways of doing
+RL, and TTC is specifically
+a inference time methos, which is something that is
+done separately and is not really considered a
+training stage anymore, because the model weights
+are usually not updated in TTC.

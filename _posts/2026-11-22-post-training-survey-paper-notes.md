@@ -81,9 +81,59 @@ so there's a total of six different leaf nodes of
 the classification tree. Then the authors look at 
 specific papers in those areas as well as more finely
  detailed distinctions within each areas.
+
 # What is SFT?
 
+SFT is defined in the paper as methods for
+generating instructions and responses.
+
+common methods of SFT are primarily human labels
+where the human produces a high-quality data, but
+it's costly an insufficient for scaling.
+
+Scaling SFT involves constructing instructions 
+in responses through various scalable training 
+and data construction methods. These methods
+usually involve LLMs of various sizes and
+qualities in different ways.
+
+## Instruction Generation
+
+SFT involves instructions and the
+responses a common technique that is scalable
+is called instruction generation where the
+response is collection of known high-quality
+responses, and then LLM's are used to generate
+the instructions. Techniques in the space are
+mentioned in the paper, including WebInstruct,
+backtranslate, and ditto.
+
+A second approach in the instruction generation
+category is evolution based methods these methods
+use an evolutionary mimicry strategy to iteratively
+refined given instructions to improve their alignment
+with the given response.
+
+TODO: add anchor tags
+
+## Response Generation
+
+SFT uses a collection of instructions and responses
+so given a collection of quality instructions, another approach is to generate.
+The responses approaches in this category include 
+sampling self self refinement and weak supervision.
+
+A common issue in the response generation space is
+redundancy in the generated responses, so most of the 
+techniques aim to improve given an existing sample or 
+sample samples of responses.
+The degree to which improvement in the responses that
+are generated as possible is largely limited by the
+capability of the model.
+
 # What is RL?
+
+
 
 # What is TTC?
 

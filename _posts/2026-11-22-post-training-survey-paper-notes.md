@@ -138,6 +138,24 @@ capability of the model.
 
 # What is RL?
 
+The paper defines RL as learning from environments
+through interactions and rewards. in my experience, 
+assuring the alignment of the environment in the RL 
+training phase is as closely aligned with the operating
+environment once it's deployed is the key.
+
+The common methods here are human labeling and reward modeling.
+
+A human labeling approach has humans actually labeling the traces.
+DPO, KTO, SimPO, and RRHF are common human labeling approaches.
+
+ 
+In contrast with human labeling, reward modeling integrates
+ a reward signal from a model.
+This significantly enhances the scaleability of RLHF
+or reinforcement learning with human feedback.
+
+
 <img src='{{site.baseurl}}/images/IMG_2758.jpeg'
 loading='lazy'
 alt="figure 4, classification of RL methods"
